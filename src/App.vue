@@ -1,7 +1,3 @@
-<script setup>
-import { RouterView } from "vue-router";
-</script>
-
 <template>
   <div class="text-white">
     <router-link to="/">Home</router-link>
@@ -9,5 +5,9 @@ import { RouterView } from "vue-router";
   </div>
   <RouterView />
 </template>
+
+<script setup>
+import { RouterView } from "vue-router";
+</script>
 
 <style></style>
