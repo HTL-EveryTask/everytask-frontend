@@ -1,9 +1,11 @@
 <template>
-  <div class="text-white">
-    <router-link to="/">Home</router-link>
-    <router-link to="/tasks">Tasks</router-link>
+  <div>
+    <div class="text-white">
+      <router-link to="/">Home</router-link>
+      <router-link to="/tasks">Tasks</router-link>
+    </div>
+    <RouterView />
   </div>
-  <RouterView />
 </template>
 
 <script setup>
