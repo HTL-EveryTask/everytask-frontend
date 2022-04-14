@@ -5,8 +5,7 @@
       ...or
       <router-link to="/register" class="underline">Register</router-link>
     </h2>
-
-    <form>
+    <form @submit.prevent="login()">
       <div class="mb-6">
         <label
           for="email"
@@ -44,6 +43,7 @@
             type="checkbox"
             class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
             required
+            checked="checked"
           />
         </div>
         <div class="ml-3 text-sm">
@@ -57,7 +57,6 @@
       <button
         type="submit"
         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        @click="login()"
       >
         Submit
       </button>
@@ -66,19 +65,33 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "LoginView",
   data() {
     return {
-      email: "",
-      password: "",
+      email: "yes@gmail.com",
+      password: "YOMAMA",
     };
   },
   methods: {
-    login() {
+    async login() {
       console.log("Logging in...");
       console.log(this.email);
       console.log(this.password);
+      // api call to login php page
+      axios
+        .post("http://localhost:8080/", {
+          action: "login",
+          email: this.email,
+          password: this.password,
+        })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };
