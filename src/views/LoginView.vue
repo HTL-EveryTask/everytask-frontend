@@ -1,12 +1,11 @@
 <template>
-  <div class="bg-slate-800 p-8 w-1/2 mx-auto m-10 rounded-lg">
+  <div class="bg-slate-800 p-8 md:w-1/2 mx-auto m-10 rounded-lg w-80 max-w-2xl">
     <h1 class="text-blue-300 text-4xl font-bold text-center">Login</h1>
     <h2 class="text-slate-400 text-m text-center">
       ...or
       <router-link to="/register" class="underline">Register</router-link>
     </h2>
-
-    <form>
+    <div>
       <div class="mb-6">
         <label
           for="email"
@@ -61,7 +60,7 @@
       >
         Submit
       </button>
-    </form>
+    </div>
   </div>
 </template>
 
