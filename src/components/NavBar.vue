@@ -11,7 +11,7 @@
         <router-link to="/register">Register</router-link>
       </li>
       <li class="nav-element">
-        <router-link to="/contact">Contact</router-link>
+        <router-link to="/tasks">Tasks</router-link>
       </li>
     </ul>
   </div>
