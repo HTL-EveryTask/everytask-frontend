@@ -1,16 +1,16 @@
 <template>
-  <div class="text-black bg-slate-400 w-1/2 mx-auto flex p-6 rounded-2xl">
-    <input type="checkbox" v-model="task.completed" class="mr-6" />
-    <div>
-      <h1 class="text-xl font-bold">{{ task.title }}</h1>
-      <p class="text-sm">{{ task.description }}</p>
-    </div>
+  <div v-for="n in 10" :key="n" class="m-2">
+    <TaskCard />
   </div>
 </template>
 
 <script>
+import TaskCard from "../components/TaskCard.vue";
+
 export default {
   name: "TaskView",
+  components: { TaskCard },
+
   props: {
     task: {
       type: Object,
@@ -28,4 +28,12 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.outer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+</style>

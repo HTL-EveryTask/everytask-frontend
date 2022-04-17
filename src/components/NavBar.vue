@@ -33,6 +33,6 @@ export default {
 
 .nav-element:hover {
   @apply transition-all;
-  @apply bg-slate-900 text-blue-300 ;
+  @apply bg-slate-900 text-blue-300;
 }
 </style>
