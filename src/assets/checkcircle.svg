@@ -1,0 +1,9 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="checkcircle">
+        <circle id="circle" cx="64" cy="64" r="52.5" stroke="#9E91EA" stroke-width="7">
+            <animate attributeName="stroke-dashoffset" values="360;0" dur="2s" repeatCount="indefinite" />
+        </circle>
+        <path id="checkmark" d="M91 40L56.4028 88L38 71.3333" stroke="#3F518F" stroke-width="10" stroke-linecap="round"
+              stroke-linejoin="round"/>
+    </g>
+</svg>
