@@ -12,7 +12,7 @@
 
 <script>
 import Task from "../models/Task";
-import CheckCircle from "./CheckCircle.vue";
+import CheckCircle from "./icons/CheckCircle.vue";
 
 export default {
   name: "TaskCard",
