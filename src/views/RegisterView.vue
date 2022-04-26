@@ -90,7 +90,6 @@ export default {
   },
   methods: {
     register() {
-      console.log("Registering user...");
       console.log(this.username);
       console.log(this.email);
       console.log(this.password);
