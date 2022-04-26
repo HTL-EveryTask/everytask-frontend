@@ -1,36 +1,17 @@
-/**
- * Vuex store example
- */
-export default {
-  /** Application state */
-  state: {
-    hostData: {},
-  },
+import { createStore } from "vuex";
 
-  /** Methods that read the application state */
-  getters: {
-    friendlyCounter(state) {
-      return `counter = ${state.counter}`;
-    },
+// Create a new store instance.
+const store = createStore({
+  state() {
+    return {
+      loggedIn: false,
+    };
   },
-
-  /** Methods that change the application state synchronously */
   mutations: {
-    setCounter(state, counter) {
-      state.counter = counter;
-    },
-
-    count(state) {
-      state.counter++;
+    increment(state) {
+      state.count++;
     },
   },
+});
 
-  /** Methods that change the application state asynchronously */
-  actions: {
-    countLater({ commit }) {
-      setTimeout(() => {
-        commit("count");
-      }, 1000);
-    },
-  },
-};
+export default store;
