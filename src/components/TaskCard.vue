@@ -8,7 +8,10 @@
       <p class="text-sm">{{ task.description }}</p>
     </div>
 
-    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full self-end" @click="deleteTask">
+    <button
+      class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full ml-auto"
+      @click="deleteTask"
+    >
       Delete
     </button>
   </div>
