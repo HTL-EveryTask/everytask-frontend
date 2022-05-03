@@ -52,14 +52,7 @@ export default {
 
   methods: {
     addTask() {
-      this.$emit("add", this.task);
-      this.task = {
-        title: "",
-        description: "",
-        dueDate: "",
-        createDate: "",
-        note: "",
-      };
+      // TODO: plz Add task to database
     },
   },
 };
