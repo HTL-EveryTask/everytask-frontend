@@ -1,17 +1,20 @@
-import { createStore } from "vuex";
+import Vuex from "vuex";
 
-// Create a new store instance.
-const store = createStore({
-  state() {
-    return {
-      loggedIn: false,
-    };
-  },
-  mutations: {
-    increment(state) {
-      state.count++;
+export const store = new Vuex.Store({
+  state: {
+    user: {
+      id: null,
+      name: null,
+      email: null,
+      token: null,
+      avatar: null,
+      role: null,
+      isLoggedIn: false,
     },
+    isLoading: false,
+    isError: false,
+    errorMessage: null,
+    isSuccess: false,
+    successMessage: null,
   },
 });
-
-export default store;
