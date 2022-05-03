@@ -1,8 +1,10 @@
-import axios from "axios"
+import axios from "axios";
 
 let token = null;
 
 export default class EveryTask {
+
+
     login(email, password) {
         axios
             .post("http://localhost:8080", {
@@ -35,11 +37,11 @@ export default class EveryTask {
             });
     }
 
-    getTasks(title, description, is_done, due_time, note) {
+    addTask(title, description, is_done, due_time, note) {
         axios
             .post("http://localhost:8080/", {
                 action: "addTask", 
-                token: this.getToken(),
+                token: this.$store.getters.getToken(),
                 title: title, 
                 description: description,
                 is_done: is_done,
