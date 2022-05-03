@@ -33,4 +33,12 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.dark button {
+  background-color: #2e5077;
+}
+
+.light button {
+  background-color: #a5cefc;
+}
+</style>
