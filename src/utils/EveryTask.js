@@ -1,9 +1,20 @@
 import axios from "axios";
 
-let token = null;
-
 export default class EveryTask {
-
+  login(email, password) {
+    axios
+      .post("http://localhost:8080", {
+        action: "login",
+        email: email,
+        password: password,
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
     login(email, password) {
         axios
@@ -65,4 +76,5 @@ export default class EveryTask {
     getToken(){
       return this.token;
     }
+
 }
