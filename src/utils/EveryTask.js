@@ -2,17 +2,12 @@ import axios from "axios"
 
 export default class EveryTask {
 
-    constructor(email, password) {
-        this.email = email
-        this.password = password
-    }
-
-    login() {
+    login(email, password) {
         axios
             .post("http://localhost:8080", {
                 action: 'login',
-                email: this.email,
-                password: this.password,
+                email: email,
+                password: password,
             })
             .then((response) => {
                 console.log(response.data);
@@ -20,5 +15,25 @@ export default class EveryTask {
             .catch((error) => {
                 console.log(error);
             });
+    }
+
+    register(email, password, username) {
+        axios
+        .post("http://localhost:8080/", {
+          action: "register",
+          email: email,
+          password: password,
+          username: username,
+        })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+
+    getTasks() {
+
     }
 }

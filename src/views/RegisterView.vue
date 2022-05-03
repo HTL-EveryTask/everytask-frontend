@@ -104,6 +104,7 @@
 
 <script>
 import axios from "axios";
+import EveryTask from "../utils/EveryTask"
 
 export default {
   name: "RegisterView",
@@ -129,19 +130,8 @@ export default {
       console.log(this.password);
 
       //axios call to register user
-      axios
-        .post("http://localhost:8080/", {
-          action: "register",
-          email: this.email,
-          password: this.password,
-          username: this.username,
-        })
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      const everyTask = new EveryTask();
+      everyTask.register(this.email, this.password, this.username);
     },
 
     toggleShow() {
