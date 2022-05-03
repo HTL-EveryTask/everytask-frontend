@@ -44,10 +44,34 @@
       >
       <input
         type="password"
+        v-if="!showPassword"
         id="password"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         required
         v-model="password"
+      />
+      <input
+        type="text"
+        v-else
+        id="password-text"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        required
+        v-model="password"
+      />
+      <button class="button" @click="toggleShow">{{ toggleBtn }}</button>
+    </div>
+    <div class="mb-6">
+      <label
+        for="password"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+        >Confirm your password</label
+      >
+      <input
+        type="password"
+        id="password-confirm"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        required
+        v-model="passwordConfirm"
       />
     </div>
     <div class="flex items-start mb-6">
@@ -79,6 +103,9 @@
 </template>
 
 <script>
+import axios from "axios";
+import EveryTask from "../utils/EveryTask"
+
 export default {
   name: "RegisterView",
   data() {
@@ -86,15 +113,30 @@ export default {
       username: "",
       email: "",
       password: "",
+      passwordConfirm: "",
+      showPassword: 0,
+      toggleBtn: "Show",
     };
   },
   methods: {
-    register() {
+    async register() {
+      if (this.password !== this.passwordConfirm) {
+        console.log("Confirmation incorrect");
+        return;
+      }
+      console.log("Registering user...");
       console.log(this.username);
       console.log(this.email);
       console.log(this.password);
 
-      this.$router.push("/tasks");
+      //axios call to register user
+      const everyTask = new EveryTask();
+      everyTask.register(this.email, this.password, this.username);
+    },
+
+    toggleShow() {
+      this.showPassword = !this.showPassword;
+      this.toggleBtn = this.showPassword ? "Hide" : "Show";
     },
   },
 };
