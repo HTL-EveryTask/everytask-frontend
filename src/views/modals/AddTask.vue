@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import EveryTask from '../../utils/EveryTask';
+
 export default {
   name: "AddTask",
 
@@ -52,7 +54,8 @@ export default {
 
   methods: {
     addTask() {
-      // TODO: plz Add task to database
+      var task = new EveryTask;
+      task.addTask();
     },
   },
 };
