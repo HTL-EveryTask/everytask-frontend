@@ -10,18 +10,21 @@
   <div v-for="n in 10" :key="n" class="m-2">
     <TaskCard />
   </div>
+
+  <Modal></Modal>
 </template>
 
 <script>
 import TaskCard from "../components/TaskCard.vue";
+import Modal from "./modals/Modal.vue";
 
 export default {
   name: "TaskView",
-  components: { TaskCard },
+  components: { Modal, TaskCard },
 
   methods: {
     addTask() {
-      // A
+      this.$router.push("/tasks/addTask");
     },
   },
 };

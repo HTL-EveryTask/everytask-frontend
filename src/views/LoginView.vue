@@ -66,6 +66,8 @@
 
 <script>
 import axios from "axios";
+import EveryTask from "../utils/EveryTask";
+
 export default {
   name: "LoginView",
   data() {
@@ -80,18 +82,8 @@ export default {
       console.log(this.email);
       console.log(this.password);
       // api call to login php page
-      axios
-        .post("http://localhost:8080/", {
-          action: "login",
-          email: this.email,
-          password: this.password,
-        })
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      const everyTask = new EveryTask();
+      everyTask.login(this.email, this.password);
     },
   },
 };
