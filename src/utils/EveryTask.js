@@ -1,6 +1,8 @@
 import axios from "axios";
 
 export default class EveryTask {
+  token = "";
+
   login(email, password) {
     axios
       .post("http://localhost:8080", {
@@ -25,7 +27,7 @@ export default class EveryTask {
             })
             .then((response) => {
                 console.log(response.data);
-                token= response.data.token
+                this.token= response.data.token
             })
             .catch((error) => {
                 console.log(error);
@@ -52,7 +54,7 @@ export default class EveryTask {
         axios
             .post("http://localhost:8080/", {
                 action: "addTask", 
-                token: this.$store.getters.getToken(),
+                token: this.token,
                 title: title, 
                 description: description,
                 is_done: is_done,
@@ -67,6 +69,20 @@ export default class EveryTask {
                 console.log(error);
             });
     }
+
+    deleteTask(task_id) {
+      axios
+          .post("http://localhost:8080/", {
+              action: "deleteTask", 
+              task_id: task_id,          
+          })
+          .then((response) => {
+              console.log(response.data);
+          })
+          .catch((error) => {
+              console.log(error);
+          });
+  }
 
     currentTime() {
       var now = new Date;

@@ -5,8 +5,6 @@ export const store = new Vuex.Store({
     token: null,
   },
   getters: {
-    getToken(state){
-      return state.token;
-    }
+    token: state => state.token
   },
 });
