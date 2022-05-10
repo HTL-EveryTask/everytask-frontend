@@ -84,9 +84,9 @@ export default {
       console.log("Logging in...");
       console.log(this.email);
       console.log(this.password);
-      // api call to login php page
-      // const everyTask = new EveryTask(this.email, this.password);
-      // everyTask.login();
+      this.$store.getters
+        .everyTask()
+        .register(this.email, this.password, this.username);
     },
   },
 };

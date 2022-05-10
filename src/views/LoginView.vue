@@ -72,11 +72,8 @@ export default {
       console.log("Logging in...");
       console.log(this.email);
       console.log(this.password);
-      // api call to login php page
-      const everyTask = new EveryTask();
-      everyTask.login(this.email, this.password);
-
-      // store everytask in store
+      this.$store.getters.everyTask().login(this.email, this.password);
+      // redirect to tasks
       await router.push("/tasks");
     },
   },
