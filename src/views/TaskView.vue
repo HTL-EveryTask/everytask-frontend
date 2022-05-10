@@ -8,16 +8,14 @@
     </button>
   </div>
   <TaskCard class="m-2" v-for="task in tasks" :key="task.id" :task="task" />
-  <Modal></Modal>
 </template>
 
 <script>
 import TaskCard from "../components/TaskCard.vue";
-import Modal from "./modals/Modal.vue";
 
 export default {
   name: "TaskView",
-  components: { Modal, TaskCard },
+  components: { TaskCard },
 
   data() {
     return {
@@ -89,7 +87,7 @@ export default {
 
   methods: {
     addTask() {
-      this.$router.push("/tasks/addTask");
+      // this.$router.push("/tasks/addTask");
     },
   },
 

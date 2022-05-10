@@ -1,145 +1,135 @@
 <template>
-  <div class="bg-slate-800 p-8 md:w-1/2 mx-auto m-10 rounded-lg w-80 max-w-2xl">
-    <h1 class="text-blue-300 text-4xl font-bold text-center">Register</h1>
-    <h2 class="text-slate-400 text-m text-center">
-      ...or
-      <router-link to="/" class="underline">Login</router-link>
-    </h2>
+  <div
+    class="full-screen bg-ghostwhite flex justify-center content-center flex-col"
+  >
+    <div class="login-card">
+      <div class="logo-box block mx-auto">
+        <EveryTaskSymbol class="logo"></EveryTaskSymbol>
+      </div>
+      <header class="text-center m-6 mb-8">
+        <h1 class="text-4xl text-raisin-500">Register to EveryTask</h1>
+        <router-link to="/">
+          <h2 class="text-raisin-300">
+            or <span class="hover:underline">Login</span>
+          </h2>
+        </router-link>
+      </header>
 
-    <div class="mb-6">
-      <label
-        for="username"
-        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-        >Your username</label
-      >
-      <input
-        type="text"
-        id="username"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        placeholder="username"
-        required
-        v-model="username"
-      />
-    </div>
-    <div class="mb-6">
-      <label
-        for="email"
-        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-        >Your email</label
-      >
-      <input
-        type="email"
-        id="email"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        placeholder="name@flowbite.com"
-        required
-        v-model="email"
-      />
-    </div>
-    <div class="mb-6">
-      <label
-        for="password"
-        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-        >Your password</label
-      >
-      <input
-        type="password"
-        v-if="!showPassword"
-        id="password"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        required
-        v-model="password"
-      />
-      <input
-        type="text"
-        v-else
-        id="password-text"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        required
-        v-model="password"
-      />
-      <button class="button" @click="toggleShow">{{ toggleBtn }}</button>
-    </div>
-    <div class="mb-6">
-      <label
-        for="password"
-        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-        >Confirm your password</label
-      >
-      <input
-        type="password"
-        id="password-confirm"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        required
-        v-model="passwordConfirm"
-      />
-    </div>
-    <div class="flex items-start mb-6">
-      <div class="flex items-center h-5">
-        <input
-          id="remember"
-          aria-describedby="remember"
-          type="checkbox"
-          class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-          required
-        />
-      </div>
-      <div class="ml-3 text-sm">
-        <label
-          for="remember"
-          class="font-medium text-gray-900 dark:text-gray-300"
-          >Remember me</label
+      <div class="form">
+        <div class="input-field">
+          <label class="block text-sm text-raisin-200" for="password"
+            >Username</label
+          >
+          <input
+            class="input-text"
+            type="text"
+            v-model="username"
+            placeholder="Your Username"
+          />
+        </div>
+        <div class="input-field">
+          <label class="block text-sm text-raisin-200" for="email"
+            >E-Mail</label
+          >
+          <input
+            class="input-text"
+            type="text"
+            v-model="email"
+            placeholder="Email"
+          />
+        </div>
+        <div class="input-field">
+          <label class="block text-sm text-raisin-200" for="password"
+            >Password</label
+          >
+          <input
+            class="input-text"
+            type="password"
+            v-model="password"
+            placeholder="Password"
+          />
+          <div class="text-xs text-raisin-200 text-right">
+            <a href="#" class="text-raisin-100">Forgot password?</a>
+          </div>
+        </div>
+
+        <button
+          class="login-button font-bold transition duration-300 text-ghostwhite px-10 py-3 border-2 border-transparent rounded-full mx-auto block mt-8"
+          @click="login"
+          :disabled="!username || !email || !password"
         >
+          Register
+        </button>
       </div>
     </div>
-    <button
-      type="submit"
-      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-      @click="register()"
-    >
-      Submit
-    </button>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-import EveryTask from "../utils/EveryTask"
+import EveryTask from "../utils/EveryTask";
+import EveryTaskSymbol from "../components/icons/EveryTaskSymbol.vue";
 
 export default {
   name: "RegisterView",
+  components: { EveryTaskSymbol },
   data() {
     return {
       username: "",
-      email: "",
-      password: "",
-      passwordConfirm: "",
-      showPassword: 0,
-      toggleBtn: "Show",
+      email: "yes@gmail.com",
+      password: "YOMAMA",
     };
   },
   methods: {
-    async register() {
-      if (this.password !== this.passwordConfirm) {
-        console.log("Confirmation incorrect");
-        return;
-      }
-      console.log("Registering user...");
-      console.log(this.username);
+    async login() {
+      console.log("Logging in...");
       console.log(this.email);
       console.log(this.password);
-
-      //axios call to register user
-      const everyTask = new EveryTask();
-      everyTask.register(this.email, this.password, this.username);
-    },
-
-    toggleShow() {
-      this.showPassword = !this.showPassword;
-      this.toggleBtn = this.showPassword ? "Hide" : "Show";
+      // api call to login php page
+      // const everyTask = new EveryTask(this.email, this.password);
+      // everyTask.login();
     },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.login-card {
+  @apply bg-ghostwhite p-8 mx-auto rounded-3xl text-raisin-500;
+  @apply h-full w-full md:h-auto md:w-2/3 md:max-w-xl flex justify-center content-center flex-col;
+  box-shadow: 20px 20px 41px #c9c9e0, -25px -25px 41px #ffffff;
+}
+
+.logo {
+  @apply mx-auto block;
+  width: 75px;
+}
+
+.input-field {
+  @apply mb-4 mx-auto block w-auto md:w-2/3 w-11/12;
+}
+
+.input-text {
+  @apply p-2;
+  @apply w-full rounded-lg text-raisin-500 bg-ghostwhite border-2 border-ghostwhite-600 focus:border-cornflower-300
+  focus:outline-none focus:bg-ghostwhite-600 text-raisin-500;
+}
+
+.login-button {
+  @apply bg-gradient-to-bl from-steelpink to-steelpink;
+}
+
+.login-button:disabled {
+  @apply cursor-not-allowed opacity-50;
+  @apply bg-gradient-to-bl from-ghostwhite to-ghostwhite;
+  @apply text-raisin-500 border-2 border-raisin-200;
+}
+
+.login-button:hover:enabled {
+  background: linear-gradient(145deg, #ea2bc9, #c524a9);
+  box-shadow: 10px 10px 20px #c5c6cf, -10px -10px 20px #ffffff;
+}
+
+.login-button:active:enabled {
+  background: linear-gradient(145deg, #c524a9, #ea2bc9);
+}
+</style>
