@@ -6,8 +6,8 @@
 
       <label for="description">Description</label>
       <textarea
-          v-model="task.description"
-          placeholder="Task Description"
+        v-model="task.description"
+        placeholder="Task Description"
       ></textarea>
 
       <label for="dueDate">Due Date</label>
@@ -30,8 +30,8 @@
 
       <label for="description">Description</label>
       <textarea
-          v-model="task.description"
-          placeholder="Task Description"
+        v-model="task.description"
+        placeholder="Task Description"
       ></textarea>
 
       <label for="dueDate">Due Date</label>
@@ -54,8 +54,8 @@
 
       <label for="description">Description</label>
       <textarea
-          v-model="task.description"
-          placeholder="Task Description"
+        v-model="task.description"
+        placeholder="Task Description"
       ></textarea>
 
       <label for="dueDate">Due Date</label>
@@ -75,6 +75,8 @@
 </template>
 
 <script>
+import EveryTask from "../../utils/EveryTask";
+
 export default {
   name: "AddTask",
   emits: ["confirm", "cancel"],
@@ -97,10 +99,7 @@ export default {
   },
 
   methods: {
-    addTask() {
-      // TODO: plz Add task to database
-      console.log("close modal");
-    },
+    addTask() {},
   },
 };
 </script>

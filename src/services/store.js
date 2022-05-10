@@ -2,6 +2,11 @@ import Vuex from "vuex";
 
 export const store = new Vuex.Store({
   state: {
-    everyTask: null,
+    token: null,
+  },
+  getters: {
+    getToken(state){
+      return state.token;
+    }
   },
 });
