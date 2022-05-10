@@ -8,17 +8,24 @@
     </button>
   </div>
   <TaskCard class="m-2" v-for="task in tasks" :key="task.id" :task="task" />
+
+  <CustomModal v-model="addModal" title="Add Task">
+    <AddTask @close="addModal = false" />
+  </CustomModal>
 </template>
 
 <script>
 import TaskCard from "../components/TaskCard.vue";
+import CustomModal from "../components/CustomModal.vue";
+import AddTask from "./modals/AddTask.vue";
 
 export default {
   name: "TaskView",
-  components: { TaskCard },
+  components: { AddTask, CustomModal, TaskCard },
 
   data() {
     return {
+      addModal: false,
       // TODO plz delete beispieldaten
       tasks: [
         {
@@ -87,7 +94,7 @@ export default {
 
   methods: {
     addTask() {
-      // this.$router.push("/tasks/addTask");
+      this.addModal = true;
     },
   },
 

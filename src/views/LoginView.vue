@@ -73,9 +73,10 @@ export default {
       console.log(this.email);
       console.log(this.password);
       // api call to login php page
-      // const everyTask = new EveryTask(this.email, this.password);
-      // everyTask.login(this.email, this.password);
-      // redirect to tasks
+      const everyTask = new EveryTask();
+      everyTask.login(this.email, this.password);
+
+      // store everytask in store
       await router.push("/tasks");
     },
   },
