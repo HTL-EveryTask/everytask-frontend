@@ -23,7 +23,7 @@
         <span class="material-icons">group</span>
         <span class="text">Tasks</span>
       </router-link>
-      <router-link to="/contact" class="button">
+      <router-link to="/" class="button">
         <span class="material-icons">email</span>
         <span class="text">Contact</span>
       </router-link>
@@ -32,7 +32,7 @@
     <div class="flex"></div>
 
     <div class="menu">
-      <router-link to="/settings" class="button">
+      <router-link to="/" class="button">
         <span class="material-icons">settings</span>
         <span class="text">Settings</span>
       </router-link>

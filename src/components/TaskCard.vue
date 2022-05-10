@@ -1,6 +1,9 @@
 <template>
   <div class="flex">
-    <div class="text-black bg-slate-100 w-1/2 mx-auto flex p-6 rounded-2xl neomorph-lifted-sm">
+    <div
+      class="text-black bg-slate-100 w-1/2 mx-auto flex p-6 rounded-2xl neomorph-lifted-sm"
+      @click="editModal = true"
+    >
       <div class="flex justify-center items-center mr-6">
         <check-circle />
       </div>
@@ -30,15 +33,21 @@
         </button>
       </div>
     </div>
+    <CustomModal v-model="editModal" title="WOAAAA">
+      <EditTask @close="editModal = false" :task="task"></EditTask>
+    </CustomModal>
   </div>
 </template>
 
 <script>
 import CheckCircle from "./icons/CheckCircle.vue";
+import CustomModal from "./CustomModal.vue";
+import AddTask from "../views/modals/AddTask.vue";
+import EditTask from "../views/modals/EditTask.vue";
 
 export default {
   name: "TaskCard",
-  components: { CheckCircle },
+  components: {EditTask, AddTask, CustomModal, CheckCircle },
   props: {
     task: {
       type: Object,
@@ -52,6 +61,7 @@ export default {
   data() {
     return {
       deleteConfirm: false,
+      editModal: false,
     };
   },
 

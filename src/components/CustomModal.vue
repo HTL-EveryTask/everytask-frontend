@@ -5,7 +5,7 @@
     classes="modal-container"
     :drag="true"
     drag-selector=".modal-controls, .header"
-    overlay-style="backdrop-filter: blur(5px); background-color: rgba(0, 0, 30, 0.3);"
+    overlay-class="overlay"
   >
     <div class="modal-content">
       <div class="modal-controls">
@@ -50,6 +50,11 @@ export default {
 </script>
 
 <style scoped>
+::v-deep(.overlay) {
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 30, 0.3);
+}
+
 ::v-deep(.modal-container) {
   display: flex;
   justify-content: center;

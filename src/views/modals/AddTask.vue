@@ -29,7 +29,7 @@
 <script>
 export default {
   name: "AddTask",
-  emits: ["confirm", "cancel"],
+  emits: ["close"],
 
   data() {
     return {
