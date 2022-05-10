@@ -84,6 +84,8 @@ export default {
       // api call to login php page
       const everyTask = new EveryTask();
       everyTask.login(this.email, this.password);
+
+      this.$store.state.everyTask = everyTask;
     },
   },
 };

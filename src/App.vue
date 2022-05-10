@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <NavBar />
-    <RouterView />
+  <div class="app">
+    <NavBar class = "navbar"/>
+    <RouterView/>
   </div>
 </template>
 
@@ -10,4 +10,14 @@ import { RouterView } from "vue-router";
 import NavBar from "./components/NavBar.vue";
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+
+.navbar{
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+
+
+</style>

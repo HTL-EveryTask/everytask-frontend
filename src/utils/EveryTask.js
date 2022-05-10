@@ -3,6 +3,21 @@ import axios from "axios";
 export default class EveryTask {
   token = "";
 
+  login(email, password) {
+    axios
+      .post("http://localhost:8080", {
+        action: "login",
+        email: email,
+        password: password,
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
     login(email, password) {
         axios
             .post("http://localhost:8080", {

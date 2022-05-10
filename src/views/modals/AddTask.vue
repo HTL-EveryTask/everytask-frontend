@@ -31,6 +31,7 @@
 
 <script>
 import EveryTask from '../../utils/EveryTask';
+
 export default {
   name: "AddTask",
 

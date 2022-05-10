@@ -1,38 +1,213 @@
 <template>
-  <div
-    class="bg-slate-800 text-black w-1/3 p-3 rounded-br-2xl text-gray-900 dark:text-gray-300"
-  >
-    <h1 class="font-bold text-2xl mb-4">EveryTask</h1>
-    <ul>
-      <li class="nav-element">
-        <router-link to="/">Home</router-link>
-      </li>
-      <li class="nav-element">
-        <router-link to="/register">Register</router-link>
-      </li>
-      <li class="nav-element">
-        <router-link to="/tasks">Tasks</router-link>
-      </li>
-    </ul>
-  </div>
+  <aside :class="`${is_expanded ? 'is-expanded' : ''}`">
+    <div class="logo">
+      <img src="../assets/symbol_copy.png" alt="Vue" />
+    </div>
+
+    <div class="menu-toggle-wrap">
+      <button class="menu-toggle" @click="ToggleMenu">
+        <span class="material-icons">keyboard_double_arrow_right</span>
+      </button>
+    </div>
+
+    <div class="menu">
+      <router-link to="/" class="button">
+        <span class="material-icons">home</span>
+        <span class="text">Home</span>
+      </router-link>
+      <router-link to="/register" class="button">
+        <span class="material-icons">description</span>
+        <span class="text">Register</span>
+      </router-link>
+      <router-link to="/tasks" class="button">
+        <span class="material-icons">group</span>
+        <span class="text">Tasks</span>
+      </router-link>
+      <router-link to="/contact" class="button">
+        <span class="material-icons">email</span>
+        <span class="text">Contact</span>
+      </router-link>
+    </div>
+
+    <div class="flex"></div>
+
+    <div class="menu">
+      <router-link to="/settings" class="button">
+        <span class="material-icons">settings</span>
+        <span class="text">Settings</span>
+      </router-link>
+    </div>
+
+  </aside>
 </template>
 
-<script>
-export default {
-  name: "NavBar",
-};
+<script setup>
+import { ref } from 'vue'
+
+
+const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
+
+const ToggleMenu = () => {
+  is_expanded.value = !is_expanded.value
+  localStorage.setItem("is_expanded", is_expanded.value)
+}
 </script>
 
-<style scoped>
-.nav-element {
-  list-style: none;
-  margin: 0;
-  padding: 0.5rem;
-  @apply font-bold;
-}
+<style lang="scss" scoped>
+aside {
 
-.nav-element:hover {
-  @apply transition-all;
-  @apply bg-slate-900 text-blue-300;
+
+
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: #1e2a39;
+
+  color: var(--light);
+
+  width: calc(2rem + 32px);
+  overflow: hidden;
+  min-height: 100vh;
+  padding: 1rem;
+
+  transition: 0.2s ease-in-out;
+
+  .flex {
+    flex: 1 1 0%;
+  }
+
+  .logo {
+    margin-bottom: 1rem;
+
+
+    img {
+      width: 3rem;
+    }
+  }
+
+  .menu-toggle-wrap {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+
+    position: relative;
+
+    transition: 0.2s ease-in-out;
+
+    .menu-toggle {
+      transition: 0.2s ease-in-out;
+      .material-icons {
+        font-size: 2rem;
+        color: var(--light);
+        transition: 0.2s ease-out;
+      }
+
+      &:hover {
+        .material-icons {
+          color: var(--primary);
+          transform: translateX(0.5rem);
+        }
+      }
+    }
+  }
+
+  h3, .button .text {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  h3 {
+    color: var(--grey);
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+
+  .menu {
+    margin: 0 -1rem;
+
+    .button {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+
+      transition: 0.2s ease-in-out;
+      padding: 0.5rem 1rem;
+
+      .material-icons {
+        font-size: 2rem;
+        color: var(--light);
+        transition: 0.2s ease-in-out;
+      }
+
+      .material-icons:hover {
+        font-size: 2.5rem;
+      }
+
+      .text {
+        color: var(--light);
+        transition: 0.2s ease-in-out;
+      }
+
+      &:hover {
+        background-color: #42769f;
+
+        .material-icons, .text {
+          color: var(--primary);
+        }
+      }
+
+      &.router-link-exact-active {
+        background-color: rgba(116, 66, 148, 0.73);
+        border-right: 5px solid var(--primary);
+
+        .material-icons, .text {
+          color: var(--primary);
+        }
+      }
+    }
+  }
+
+  .footer {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+
+    p {
+      font-size: 0.875rem;
+      color: var(--grey);
+    }
+  }
+
+  &.is-expanded {
+    width: var(--sidebar-width);
+
+    .menu-toggle-wrap {
+      top: -3.5rem;
+
+      .menu-toggle {
+        transform: rotate(-180deg);
+      }
+    }
+
+    h3, .button .text {
+      opacity: 1;
+    }
+
+    .button {
+      .material-icons {
+        margin-right: 2rem;
+      }
+    }
+
+    .footer {
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    position: absolute;
+    z-index: 99;
+  }
 }
 </style>
