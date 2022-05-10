@@ -99,7 +99,9 @@ export default {
   },
 
   methods: {
-    addTask() {},
+    addTask() {
+      this.$store.getters.everyTask.addTask(this.title, this.description, flase, this.dueDate, this.note);
+    },
   },
 };
 </script>

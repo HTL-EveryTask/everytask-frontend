@@ -85,7 +85,7 @@ export default {
       console.log(this.email);
       console.log(this.password);
       this.$store.getters
-        .everyTask()
+        .everyTask
         .register(this.email, this.password, this.username);
     },
   },

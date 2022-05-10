@@ -65,7 +65,7 @@ export default {
         return;
       }
 
-      this.$store.getters.everyTask().deleteTask(this.task.id);
+      this.$store.getters.everyTask.deleteTask(this.task.id);
     },
   },
 };

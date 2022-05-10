@@ -4,6 +4,7 @@ export default class EveryTask {
   token = "";
 
     login(email, password) {
+      console.log("test");
         axios
             .post("http://localhost:8080", {
                 action: 'login', 
@@ -20,6 +21,7 @@ export default class EveryTask {
     }
 
     register(email, password, username) {
+      console.log("test")
         axios
             .post("http://localhost:8080/", {
                 action: "register", 

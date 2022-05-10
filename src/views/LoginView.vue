@@ -72,7 +72,7 @@ export default {
       console.log("Logging in...");
       console.log(this.email);
       console.log(this.password);
-      this.$store.getters.everyTask().login(this.email, this.password);
+      this.$store.getters.everyTask.login(this.email, this.password);
       // redirect to tasks
       await router.push("/tasks");
     },
