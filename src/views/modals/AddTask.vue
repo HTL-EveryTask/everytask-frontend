@@ -1,10 +1,5 @@
 <template>
-  <router-link to="/tasks" class="btn btn-primary">
-    <i class="fas fa-arrow-left"></i>
-    Back
-  </router-link>
-  <div class="container bg-slate-600">
-    <h1>Adding a Task</h1>
+  <div class="container">
     <div class="flex flex-col">
       <label for="title">Title</label>
       <input type="text" v-model="task.title" placeholder="Task Title" />
@@ -24,16 +19,17 @@
       <label for="notes">Notes</label>
       <textarea v-model="task.notes" placeholder="Notes"></textarea>
 
-      <button class="bg-cornflower p-4 mx-auto" @click="addTask">Add Task</button>
+      <button class="btn-cornflower" @click="addTask()">
+        Add Task
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import EveryTask from '../../utils/EveryTask';
-
 export default {
   name: "AddTask",
+  emits: ["confirm", "cancel"],
 
   data() {
     return {
@@ -54,8 +50,15 @@ export default {
 
   methods: {
     addTask() {
-      var task = new EveryTask;
-      task.addTask();
+      this.$store.getters.everyTask.addTask(
+        this.task.title,
+        this.task.description,
+        false,
+        this.task.dueDate,
+        this.task.createDate,
+        this.task.note
+      );
+      this.$emit("close", this.task);
     },
   },
 };
@@ -64,8 +67,5 @@ export default {
 <style scoped>
 .container {
   color: black;
-  background-color: white;
-  padding: 20px;
-  margin: 10px;
 }
 </style>

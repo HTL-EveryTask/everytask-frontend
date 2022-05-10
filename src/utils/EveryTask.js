@@ -3,23 +3,8 @@ import axios from "axios";
 export default class EveryTask {
   token = "";
 
-  login(email, password) {
-    axios
-      .post("http://localhost:8080", {
-        action: "login",
-        email: email,
-        password: password,
-      })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-    login(email, password) {
-        axios
+    async login(email, password) {
+        await axios
             .post("http://localhost:8080", {
                 action: 'login', 
                 email: email, 
@@ -34,8 +19,8 @@ export default class EveryTask {
             });
     }
 
-    register(email, password, username) {
-        axios
+    async register(email, password, username) {
+        await axios
             .post("http://localhost:8080/", {
                 action: "register", 
                 email: email, 
@@ -50,7 +35,7 @@ export default class EveryTask {
             });
     }
 
-    addTask(title, description, is_done, due_time, note) {
+    async addTask(title, description, is_done, due_time, note) {
         axios
             .post("http://localhost:8080/", {
                 action: "addTask", 
@@ -70,7 +55,7 @@ export default class EveryTask {
             });
     }
 
-    deleteTask(task_id) {
+    async deleteTask(task_id) {
       axios
           .post("http://localhost:8080/", {
               action: "deleteTask", 
