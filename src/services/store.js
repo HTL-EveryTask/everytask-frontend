@@ -1,10 +1,11 @@
 import Vuex from "vuex";
+import EveryTask from "../utils/EveryTask";
 
 export const store = new Vuex.Store({
   state: {
-    token: null,
+    everyTask: new EveryTask(),
   },
   getters: {
-    token: state => state.token
+    everyTask: (state) => state.everyTask,
   },
 });

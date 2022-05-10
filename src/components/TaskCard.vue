@@ -65,7 +65,7 @@ export default {
         return;
       }
 
-      //TODO plz delete thx
+      this.$store.getters.everyTask().deleteTask(this.task.id);
     },
   },
 };
