@@ -17,7 +17,7 @@
       <input ref="createdDate" type="date" v-model="task.createDate" />
 
       <label for="notes">Notes</label>
-      <textarea v-model="task.notes" placeholder="Notes"></textarea>
+      <textarea v-model="task.note" placeholder="Notes"></textarea>
 
       <button class="btn-cornflower" @click="addTask()">
         Add Task
@@ -34,11 +34,11 @@ export default {
   data() {
     return {
       task: {
-        title: "",
-        description: "",
-        dueDate: "",
+        title: "AAA",
+        description: "AAAAAAAA",
+        dueDate: "2022-07-22",
         createDate: "",
-        note: "",
+        note: "AAAAAAAAA",
       },
     };
   },
@@ -55,7 +55,6 @@ export default {
         this.task.description,
         false,
         this.task.dueDate,
-        this.task.createDate,
         this.task.note
       );
       this.$emit("close", this.task);
