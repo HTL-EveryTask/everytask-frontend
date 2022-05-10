@@ -54,7 +54,6 @@ const ToggleMenu = () => {
 </script>
 
 <style lang="scss" scoped>
-
 aside {
   @apply flex flex-col bg-gray-900 overflow-hidden min-h-screen p-4;
   color: var(--light);
