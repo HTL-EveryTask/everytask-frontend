@@ -36,14 +36,14 @@ export default class EveryTask {
     }
 
     async addTask(title, description, is_done, due_time, note) {
-        axios
+        await axios
             .post("http://localhost:8080/", {
                 action: "addTask", 
                 token: this.token,
                 title: title, 
                 description: description,
                 is_done: is_done,
-                due_time: due_time,
+                due_time: this.timeFormat(due_time),
                 created_time: this.currentTime(),
                 note: note,
             })
@@ -56,7 +56,7 @@ export default class EveryTask {
     }
 
     async deleteTask(task_id) {
-      axios
+        await axios
           .post("http://localhost:8080/", {
               action: "deleteTask", 
               task_id: task_id,          
@@ -67,11 +67,29 @@ export default class EveryTask {
           .catch((error) => {
               console.log(error);
           });
-  }
+    }
+
+    async showTasks() {
+        await axios
+        .post("http://localhost:8080/", {
+            action: "s", 
+        })
+        .then((response) => {
+            console.log(response.data);
+            return response.data;
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
 
     currentTime() {
       var now = new Date;
-      return now.getFullYear()+'-'+(now.getMonth()+1)+'-'+now.getDate() + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+      return now.getFullYear()+'-'+(now.getMonth()+1)+'-'+now.getDate() + " "+ now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+    }
+
+    timeFormat(date) {
+        return date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate() + " "+ date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     }
 
     getToken(){
