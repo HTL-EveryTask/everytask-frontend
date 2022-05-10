@@ -1,78 +1,70 @@
 <template>
-  <div class="bg-slate-800 p-8 w-1/2 mx-auto m-10 rounded-lg">
-    <h1 class="text-blue-300 text-4xl font-bold text-center">Login</h1>
-    <h2 class="text-slate-400 text-m text-center">
-      ...or
-      <router-link to="/register" class="underline">Register</router-link>
-    </h2>
-    <form @submit.prevent="login()">
-      <div class="mb-6">
-        <label
-          for="email"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >Your email</label
-        >
-        <input
-          type="email"
-          id="email"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="name@flowbite.com"
-          required
-          v-model="email"
-        />
+  <div
+    class="full-screen bg-ghostwhite flex justify-center content-center flex-col"
+  >
+    <div class="login-card">
+      <div class="logo-box block mx-auto">
+        <EveryTaskSymbol class="logo"></EveryTaskSymbol>
       </div>
-      <div class="mb-6">
-        <label
-          for="password"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >Your password</label
-        >
-        <input
-          type="password"
-          id="password"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          required
-          v-model="password"
-        />
-      </div>
-      <div class="flex items-start mb-6">
-        <div class="flex items-center h-5">
-          <input
-            id="remember"
-            aria-describedby="remember"
-            type="checkbox"
-            class="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-            required
-            checked="checked"
-          />
+      <header class="text-center m-6 mb-8">
+        <h1 class="text-4xl text-raisin-500">Login to EveryTask</h1>
+        <router-link to="/register">
+          <h2 class="text-raisin-300">
+            or <span class="hover:underline">Register</span>
+          </h2>
+        </router-link>
+      </header>
+
+      <div class="form">
+        <div class="input-field">
+          <label for="email">E-Mail</label>
+          <input type="text" v-model="email" placeholder="Email" />
         </div>
-        <div class="ml-3 text-sm">
-          <label
-            for="remember"
-            class="font-medium text-gray-900 dark:text-gray-300"
-            >Remember me</label
-          >
+        <div class="input-field">
+          <label for="password">Password</label>
+          <input type="password" v-model="password" placeholder="Password" />
+          <div class="subtext-right">
+            <a href="#">Forgot password?</a>
+          </div>
         </div>
+
+        <button
+          class="cornflower-button"
+          @click="login"
+          :disabled="!email || !password"
+        >
+          Login
+        </button>
       </div>
-      <button
-        type="submit"
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-      >
-        Submit
+    </div>
+
+    <div>
+      <button class="cornflower-button" @click="showModal = true">
+        Open Dynamic Modal
       </button>
-    </form>
+    </div>
+
+    <CustomModal v-model="showModal" title="Add a Task">
+      <AddTask @close="showModal = false" />
+    </CustomModal>
   </div>
 </template>
 
 <script>
 import EveryTask from "../utils/EveryTask";
+import EveryTaskSymbol from "../components/icons/EveryTaskSymbol.vue";
+import AddTask from "./modals/AddTask.vue";
+import CustomModal from "../components/CustomModal.vue";
+import router from "../router";
 
 export default {
   name: "LoginView",
+  components: { AddTask, CustomModal, EveryTaskSymbol },
   data() {
     return {
       email: "yes@gmail.com",
       password: "YOMAMA",
+      showModal: false,
     };
   },
   methods: {
@@ -81,13 +73,24 @@ export default {
       console.log(this.email);
       console.log(this.password);
       // api call to login php page
-      const everyTask = new EveryTask();
-      everyTask.login(this.email, this.password);
-
-      this.$store.state.everyTask = everyTask;
+      // const everyTask = new EveryTask(this.email, this.password);
+      // everyTask.login(this.email, this.password);
+      // redirect to tasks
+      await router.push("/tasks");
     },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.login-card {
+  @apply bg-ghostwhite p-8 mx-auto rounded-3xl text-raisin-500;
+  @apply h-full w-full md:h-auto md:w-2/3 md:max-w-xl flex justify-center content-center flex-col;
+  box-shadow: 20px 20px 41px #c9c9e0, -25px -25px 41px #ffffff;
+}
+
+.logo {
+  @apply mx-auto block;
+  width: 75px;
+}
+</style>
