@@ -36,6 +36,7 @@ export default class EveryTask {
     }
 
     async addTask(title, description, is_done, due_time, note) {
+        console.log(due_time);
         await axios
             .post("http://localhost:8080/", {
                 action: "addTask", 
@@ -89,7 +90,7 @@ export default class EveryTask {
     }
 
     timeFormat(date) {
-        return date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate() + " "+ date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        return date + " 12:00:00";
     }
 
     getToken(){
