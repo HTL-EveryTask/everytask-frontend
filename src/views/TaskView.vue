@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-slate-800 flex w-1/2 mx-auto p-3 rounded-2xl">
+  <div class="bg-ghostwhite neomorph-lifted flex w-1/2 mx-auto p-3 rounded-2xl">
     <button
       @click="addTask()"
       class="bg-red-500 self-center font-bold p-2 px-5 rounded-xl"
@@ -7,7 +7,7 @@
       ADD
     </button>
   </div>
-  <TaskCard class="m-2" v-for="task in tasks" :key="task.id" :task="task" />
+  <TaskCard class="m-4" v-for="task in tasks" :key="task.id" :task="task" />
 
   <CustomModal v-model="addModal" title="Add Task">
     <AddTask @close="addModal = false" />

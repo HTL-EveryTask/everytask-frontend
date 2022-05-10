@@ -84,9 +84,11 @@ export default {
       console.log("Logging in...");
       console.log(this.email);
       console.log(this.password);
-      this.$store.getters
-        .everyTask()
-        .register(this.email, this.password, this.username);
+      this.$store.getters.everyTask.register(
+        this.email,
+        this.password,
+        this.username
+      );
     },
   },
 };

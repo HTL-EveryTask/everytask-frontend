@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+    body {
+        @apply bg-ghostwhite
+    }
+
     html {
         font-family: proxima-nova, sans-serif;
         font-weight: 500;
@@ -30,8 +34,16 @@
         left: 0;
     }
 
-    .neomorph-lifted-lg {
+    .neomorph-lifted {
         box-shadow: 20px 20px 41px #c9c9e0, -25px -25px 41px #ffffff;
+    }
+
+    .neomorph-lifted-sm {
+        box-shadow: 10px 10px 21px #c9c9e0, -15px -15px 21px #ffffff;
+    }
+
+    .neomorph-lifted-xs {
+        box-shadow: 5px 5px 11px #c9c9e0, -5px -5px 11px #ffffff;
     }
 }
 
@@ -41,40 +53,41 @@
 
         @apply mb-4 mx-auto block w-auto md:w-2/3 w-11/12;
 
-        label {
-            @apply block text-sm text-raisin-200;
-        }
-
-        input {
-            @apply p-2;
-            @apply w-full rounded-lg text-raisin-500 bg-ghostwhite border-2 border-ghostwhite-600 focus:border-cornflower-300
-            focus:outline-none focus:bg-ghostwhite-600 text-raisin-500;
-        }
+    label {
+        @apply block text-sm text-raisin-200;
     }
 
-    .subtext-right {
-        @apply text-xs text-raisin-100 text-right
+    input {
+        @apply p-2;
+        @apply w-full rounded-lg text-raisin-500 bg-ghostwhite border-2 border-ghostwhite-600 focus:border-cornflower-300
+        focus:outline-none focus:bg-ghostwhite-600 text-raisin-500;
     }
+}
 
-    .cornflower-button {
-        @apply bg-gradient-to-bl from-cornflower to-cornflower;
-        @apply font-bold transition duration-300 text-ghostwhite px-10 py-3 border-2 border-transparent rounded-full mx-auto block mt-8;
-    }
+.subtext-right {
+    @apply text-xs text-raisin-100 text-right
+}
 
-    .cornflower-button:disabled {
-        @apply cursor-not-allowed opacity-50;
-        @apply bg-gradient-to-bl from-ghostwhite to-ghostwhite;
-        @apply text-raisin-500 border-2 border-raisin-200;
-    }
+.btn-cornflower {
+    @apply bg-gradient-to-bl from-cornflower to-cornflower;
+    @apply font-bold transition duration-300 text-ghostwhite px-10 py-3 border-2 border-transparent rounded-full mx-auto block mt-8;
+}
 
-    .cornflower-button:hover:enabled {
-        background: linear-gradient(145deg, #648fff, #5479e6);
-        box-shadow: 10px 10px 20px #c5c6cf, -10px -10px 20px #ffffff;
-    }
+.btn-cornflower:disabled {
+    @apply cursor-not-allowed opacity-50;
+    @apply bg-gradient-to-bl from-ghostwhite to-ghostwhite;
+    @apply text-raisin-500 border-2 border-raisin-200;
+}
 
-    .cornflower-button:active:enabled {
-        background: linear-gradient(145deg, #5479e6, #648fff);
-    }
+.btn-cornflower:hover:enabled {
+    background: linear-gradient(145deg, #648fff, #5479e6);
+    box-shadow: 10px 10px 20px #c5c6cf, -10px -10px 20px #ffffff;
+}
+
+.btn-cornflower:active:enabled {
+    background: linear-gradient(145deg, #5479e6, #648fff);
+}
+
 }
 
 

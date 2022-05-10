@@ -1,6 +1,6 @@
 <template>
   <div class="flex">
-    <div class="text-black bg-slate-100 w-1/2 mx-auto flex p-6 rounded-2xl">
+    <div class="text-black bg-slate-100 w-1/2 mx-auto flex p-6 rounded-2xl neomorph-lifted-sm">
       <div class="flex justify-center items-center mr-6">
         <check-circle />
       </div>
@@ -65,7 +65,7 @@ export default {
         return;
       }
 
-      this.$store.getters.everyTask().deleteTask(this.task.id);
+      this.$store.getters.everyTask.deleteTask(this.task.id);
     },
   },
 };
