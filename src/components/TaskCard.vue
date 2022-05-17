@@ -66,7 +66,7 @@ export default {
   },
 
   methods: {
-    deleteTask() {
+    async deleteTask() {
       if (!this.deleteConfirm) {
         this.deleteConfirm = true;
         setTimeout(() => {
@@ -75,7 +75,8 @@ export default {
         return;
       }
 
-      this.$store.getters.everyTask.deleteTask(this.task.id);
+      await this.$store.getters.everyTask.deleteTask(this.task["pk_task_id"]);
+      this.$store.dispatch("updateTasks");
     },
   },
 };

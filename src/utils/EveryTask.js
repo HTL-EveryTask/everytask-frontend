@@ -6,8 +6,8 @@ export default class EveryTask {
     async login(email, password) {
         await axios
             .post("http://localhost:8080", {
-                action: 'login', 
-                email: email, 
+                action: 'login',
+                email: email,
                 password: password,
             })
             .then((response) => {
@@ -22,9 +22,9 @@ export default class EveryTask {
     async register(email, password, username) {
         await axios
             .post("http://localhost:8080/", {
-                action: "register", 
-                email: email, 
-                password: password, 
+                action: "register",
+                email: email,
+                password: password,
                 username: username,
             })
             .then((response) => {
@@ -39,9 +39,9 @@ export default class EveryTask {
         console.log(due_time);
         await axios
             .post("http://localhost:8080/", {
-                action: "addTask", 
+                action: "addTask",
                 token: this.token,
-                title: title, 
+                title: title,
                 description: description,
                 is_done: is_done,
                 due_time: this.timeFormat(due_time),
@@ -59,8 +59,8 @@ export default class EveryTask {
     async deleteTask(task_id) {
         await axios
           .post("http://localhost:8080/", {
-              action: "deleteTask", 
-              task_id: task_id,          
+              action: "deleteTask",
+              task_id: task_id,
           })
           .then((response) => {
               console.log(response.data);
@@ -70,18 +70,14 @@ export default class EveryTask {
           });
     }
 
-    async showTasks() {
-        await axios
+    async getTasks() {
+        let response = await axios
         .post("http://localhost:8080/", {
-            action: "s", 
-        })
-        .then((response) => {
-            console.log(response.data);
-            return response.data;
-        })
-        .catch((error) => {
-            console.log(error);
+            action: "getTasks",
         });
+
+        console.log(response.data);
+        return response.data;
     }
 
     currentTime() {

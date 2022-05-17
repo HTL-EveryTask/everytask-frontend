@@ -49,15 +49,16 @@ export default {
   },
 
   methods: {
-    addTask() {
-      this.$store.getters.everyTask.addTask(
+    async addTask() {
+      this.$emit("close", this.task);
+      await this.$store.getters.everyTask.addTask(
         this.task.title,
         this.task.description,
         false,
         this.task.dueDate,
         this.task.note
       );
-      this.$emit("close", this.task);
+      this.$store.dispatch("updateTasks");
     },
   },
 };

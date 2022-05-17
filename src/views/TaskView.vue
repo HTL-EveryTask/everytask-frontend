@@ -7,9 +7,15 @@
       ADD
     </button>
   </div>
-  <TaskCard class="m-4" v-for="task in tasks" :key="task.id" :task="task" />
+  <TaskCard
+    class="m-4"
+    v-for="task in tasks"
+    :key="task.id"
+    :task="task"
+    v-if="!loading"
+  />
 
-  <CustomModal v-model="addModal" title="Add Task">
+  <CustomModal v-model="addModal" title="Add a Task">
     <AddTask @close="addModal = false" />
   </CustomModal>
 </template>
@@ -26,8 +32,7 @@ export default {
   data() {
     return {
       addModal: false,
-      // TODO plz delete beispieldaten
-      tasks: [],
+      loading: true,
     };
   },
 
@@ -37,8 +42,14 @@ export default {
     },
   },
 
-  mounted() {
-    this.tasks = this.$store.state.everyTask.showTasks();
+  async mounted() {
+    await this.$store.dispatch("updateTasks");
+    this.loading = false;
+  },
+  computed: {
+    tasks() {
+      return this.$store.getters.tasks;
+    },
   },
 };
 </script>
