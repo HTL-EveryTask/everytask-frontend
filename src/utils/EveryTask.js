@@ -86,7 +86,12 @@ export default class EveryTask {
 
     currentTime() {
       var now = new Date;
-      return now.getFullYear()+'-'+(now.getMonth()+1)+'-'+now.getDate() + " "+ now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+      if (now.getMonth() < 10) {
+        var month = "0" + (now.getMonth() + 1);
+      } else {
+        var month = now.getMonth() + 1;
+      }
+      return now.getFullYear()+'-'+month+'-'+now.getDate() + " "+ now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
     }
 
     timeFormat(date) {
