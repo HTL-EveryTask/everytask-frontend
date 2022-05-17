@@ -5,7 +5,7 @@
       @click="editModal = true"
     >
       <div class="flex justify-center items-center mr-6">
-        <check-circle />
+        <check-circle/>
       </div>
       <div>
         <h1 class="text-xl font-bold">{{ task.title }}</h1>
@@ -15,7 +15,7 @@
       <div class="ml-auto flex flex-nowrap">
         <button
           class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
-          @click="deleteTask"
+          @click.stop="deleteTask"
         >
           Delete
         </button>
@@ -23,7 +23,7 @@
         <button
           class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
           v-if="deleteConfirm"
-          @click="
+          @click.stop="
             () => {
               this.deleteConfirm = false;
             }
