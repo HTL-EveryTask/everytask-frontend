@@ -35,12 +35,13 @@ export default class EveryTask {
       });
   }
 
-  async addTask(title, description, is_done, due_time, note) {
+  async addTask(group_id, title, description, is_done, due_time, note) {
     console.log(due_time);
     await axios
       .post("http://localhost:8080/", {
         action: "addTask",
         token: this.token,
+        group_id: group_id,
         title: title,
         description: description,
         is_done: is_done,
@@ -135,13 +136,13 @@ export default class EveryTask {
       title_new: title_new,
       description_new: description_new,
       done_new: done_new,
-      due_time_new: due_time_new,
-      create_time_new: create_time_new,
+      due_time_new: this.timeFormat(due_time_new),
+      create_time_new: this.timeFormat(create_time_new),
       note_new: note_new,
     });
   }
 
-  async editTask(
+  async editTaskbyId(
     task_id,
     title_new,
     description_new,
@@ -157,8 +158,8 @@ export default class EveryTask {
       title_new: title_new,
       description_new: description_new,
       done_new: done_new,
-      due_time_new: due_time_new,
-      create_time_new: create_time_new,
+      due_time_new: this.timeFormat(due_time_new),
+      create_time_new: this.timeFormat(create_time_new),
       note_new: note_new,
     });
   }
