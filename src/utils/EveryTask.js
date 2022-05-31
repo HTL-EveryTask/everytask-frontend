@@ -121,7 +121,6 @@ export default class EveryTask {
     old_description,
     old_due_time,
     old_create_time,
-    creator_id_new,
     title_new,
     description_new,
     done_new,
@@ -132,7 +131,29 @@ export default class EveryTask {
     await axios.post("http://localhost:8080/", {
       action: "editTask",
       task_id: this.getTaskId(old_description, old_due_time, old_create_time),
-      creator_id_new: creator_id_new,
+      token: this.token,
+      title_new: title_new,
+      description_new: description_new,
+      done_new: done_new,
+      due_time_new: due_time_new,
+      create_time_new: create_time_new,
+      note_new: note_new,
+    });
+  }
+
+  async editTask(
+    task_id,
+    title_new,
+    description_new,
+    done_new,
+    due_time_new,
+    create_time_new,
+    note_new
+  ) {
+    await axios.post("http://localhost:8080/", {
+      action: "editTask",
+      task_id: task_id,
+      token: this.token,
       title_new: title_new,
       description_new: description_new,
       done_new: done_new,
