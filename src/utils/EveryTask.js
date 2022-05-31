@@ -163,4 +163,8 @@ export default class EveryTask {
       note_new: note_new,
     });
   }
+
+  getToken() {
+    return this.token;
+  }
 }
