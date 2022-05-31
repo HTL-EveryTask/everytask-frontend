@@ -87,19 +87,19 @@ export default class EveryTask {
     } else {
       var month = now.getMonth() + 1;
     }
-    return (
-      now.getFullYear() +
-      "-" +
-      month +
-      "-" +
-      now.getDate() +
-      " " +
-      now.getHours() +
-      ":" +
-      now.getMinutes() +
-      ":" +
-      now.getSeconds()
-    );
+      return (
+        now.getFullYear() +
+        "-" +
+        month +
+        "-" +
+        now.getDate() +
+        " " +
+        now.getHours() +
+        ":" +
+        now.getMinutes() +
+        ":" +
+        now.getSeconds()
+      );
   }
 
   timeFormat(date) {
