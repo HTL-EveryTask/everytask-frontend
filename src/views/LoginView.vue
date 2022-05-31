@@ -18,11 +18,11 @@
       <div class="form">
         <div class="input-field">
           <label for="email">E-Mail</label>
-          <input type="text" v-model="email" placeholder="Email" />
+          <input id="email" type="text" v-model="email" placeholder="Email" />
         </div>
         <div class="input-field">
           <label for="password">Password</label>
-          <input type="password" v-model="password" placeholder="Password" />
+          <input id="password" type="password" v-model="password" placeholder="Password" />
           <div class="subtext-right">
             <a href="#">Forgot password?</a>
           </div>
