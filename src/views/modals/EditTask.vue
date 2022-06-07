@@ -52,7 +52,7 @@ export default {
   methods: {
     async editTask() {
       this.$emit("close", this.newTask);
-      await this.$store.getters.everyTask.editTaskById(
+      await this.$store.getters.everyTask.editTaskbyId(
         this.task.id,
         this.newTask.title,
         this.newTask.description,
