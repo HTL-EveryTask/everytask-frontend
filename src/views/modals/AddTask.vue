@@ -19,6 +19,14 @@
       <label for="notes">Notes</label>
       <textarea v-model="task.note" placeholder="Notes"></textarea>
 
+      <sub-task v-for="(s,index) in task.subTasks" v-model="task.subTasks[index]" @delete="deleteSubTask(index)"/>
+
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        @click="addSubTask">
+        Add Sub Task
+      </button>
+
       <button class="btn-cornflower" @click="addTask()">
         Add Task
       </button>
@@ -27,8 +35,10 @@
 </template>
 
 <script>
+import SubTask from "../../components/subTask.vue";
 export default {
   name: "AddTask",
+  components: {SubTask},
   emits: ["close"],
 
   data() {
@@ -39,6 +49,7 @@ export default {
         dueDate: "2022-07-22",
         createDate: "",
         note: "AAAAAAAAA",
+        subTasks: [],
       },
     };
   },
@@ -51,6 +62,7 @@ export default {
   methods: {
     async addTask() {
       this.$emit("close", this.task);
+      //TODO PLZ FÜR SUBTASK
       await this.$store.getters.everyTask.addTask(
         this.task.title,
         this.task.description,
@@ -60,6 +72,15 @@ export default {
       );
       this.$store.dispatch("updateTasks");
     },
+
+    addSubTask() {
+      this.task.subTasks.push("");
+      console.log(this.task.subTasks);
+    },
+
+    deleteSubTask(index){
+      this.task.subTasks.splice(index,1);
+    }
   },
 };
 </script>
