@@ -17,12 +17,13 @@
       <input ref="createdDate" type="date" v-model="task.createDate" />
 
       <label for="notes">Notes</label>
-      <textarea v-model="task.note" placeholder="Notes"></textarea>
+      <textarea v-model="task.note" ref="notes" placeholder="Notes"></textarea>
 
-      <sub-task v-for="(s,index) in task.subTasks" v-model="task.subTasks[index]" @delete="deleteSubTask(index)"/>
+      <label>Subtasks</label>
+      <sub-task v-for="(s,index) in task.subTasks" v-model="task.subTasks[index]['text']" :key="s" @delete="deleteSubTask(index)" @done="(done) => setDone(index,done)"/>
 
       <button
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        class="btn-cornflower w-1/2 mt-5 py-2 px-4 rounded"
         @click="addSubTask">
         Add Sub Task
       </button>
@@ -49,7 +50,7 @@ export default {
         dueDate: "2022-07-22",
         createDate: "",
         note: "AAAAAAAAA",
-        subTasks: [],
+        subTasks: []
       },
     };
   },
@@ -75,12 +76,16 @@ export default {
     },
 
     addSubTask() {
-      this.task.subTasks.push("");
+      this.task.subTasks.push({text:'',done:false, id:Math.random()});
       console.log(this.task.subTasks);
     },
 
     deleteSubTask(index){
       this.task.subTasks.splice(index,1);
+    },
+
+    setDone(index, done){
+      this.task.subTasks[index]['done'] = done;
     }
   },
 };

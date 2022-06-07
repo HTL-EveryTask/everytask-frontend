@@ -7,7 +7,7 @@
   <TaskCard
     class="m-4"
     v-for="task in tasks"
-    :key="task.id"
+    :key="task"
     :task="task"
     v-if="!loading"
   />
