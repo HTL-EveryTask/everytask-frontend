@@ -60,8 +60,7 @@ export default {
           params: {
             school: untis.school,
           },
-          headers: {
-          },
+          headers: {},
           data: {
             id: untis.id,
             validationString: untis._buildCookies(),
@@ -70,8 +69,43 @@ export default {
             jsonrpc: "2.0",
           },
         });
+        console.log(typeof response.data.result === "number");
         return typeof response.data.result === "number";
       };
+
+      untis._request = async (
+        method,
+        parameter = {},
+        validateSession = true,
+        url = `/WebUntis/jsonrpc.do`
+      ) => {
+        if (validateSession && !(await untis.validateSession()))
+          throw new Error("Current Session is not valid");
+        const response = await untis.axios({
+          method: "POST",
+          url: url,
+          params: {
+            school: untis.school,
+          },
+          headers: {
+          },
+          data: {
+            validationString: untis._buildCookies(),
+            id: untis.id,
+            method: method,
+            params: parameter,
+            jsonrpc: "2.0",
+          },
+        });
+        if (!response.data.result)
+          throw new Error("Server didn't return any result.");
+        if (response.data.result.code)
+          throw new Error(
+            "Server returned error code: " + response.data.result.code
+          );
+        return response.data.result;
+      };
+
       untis.axios = axios.create({
         baseURL: "http://localhost:3002",
         maxRedirects: 0,
