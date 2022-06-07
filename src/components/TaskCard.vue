@@ -96,4 +96,8 @@ export default {
 .light button {
   background-color: #a5cefc;
 }
+
+.flex:hover {
+  cursor: pointer;
+}
 </style>
