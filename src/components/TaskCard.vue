@@ -5,7 +5,7 @@
       @click="editModal = true"
     >
       <div class="flex justify-center items-center mr-6">
-        <check-circle />
+        <check-circle @click.stop @check="handleCheck()" :checked="!!isDone" />
       </div>
       <div>
         <h1 class="text-xl font-bold">{{ task.title }}</h1>
@@ -33,7 +33,7 @@
         </button>
       </div>
     </div>
-    <CustomModal v-model="editModal" title="WOAAAA">
+    <CustomModal v-model="editModal" title="Edit Task">
       <EditTask @close="editModal = false" :task="task"></EditTask>
     </CustomModal>
   </div>
@@ -61,6 +61,7 @@ export default {
     return {
       deleteConfirm: false,
       editModal: false,
+      isDone: this.task.done,
     };
   },
 
@@ -76,6 +77,12 @@ export default {
 
       await this.$store.getters.everyTask.deleteTask(this.task["pk_task_id"]);
       this.$store.dispatch("updateTasks");
+    },
+
+    async handleCheck() {
+      // this.$store.dispatch("toggleTask", this.task["pk_task_id"]);
+      this.isDone = !this.isDone;
+      console.log(this.isDone);
     },
   },
 };

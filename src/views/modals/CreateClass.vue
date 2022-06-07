@@ -87,8 +87,7 @@ export default {
           params: {
             school: untis.school,
           },
-          headers: {
-          },
+          headers: {},
           data: {
             validationString: untis._buildCookies(),
             id: untis.id,

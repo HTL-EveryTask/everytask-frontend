@@ -54,6 +54,14 @@ export default {
       showModal: false,
     };
   },
+
+  created() {
+    // log the user out if they are logged in
+    if (this.$store.state.everyTask.getToken()) {
+      this.$store.dispatch("logout");
+    }
+  },
+
   methods: {
     async login() {
       console.log("Logging in...");

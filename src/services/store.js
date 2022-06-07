@@ -32,5 +32,9 @@ export const store = new Vuex.Store({
         commit("setTasks", tasks);
       });
     },
+
+    logout({ state }) {
+      state.everyTask = new EveryTask();
+    },
   },
 });

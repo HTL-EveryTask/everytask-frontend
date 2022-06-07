@@ -11,15 +11,15 @@
       ></textarea>
 
       <label for="dueDate">Due Date</label>
-      <input ref="dueDate" type="date" v-model="newTask.dueDate" />
+      <input ref="dueDate" type="date" v-model="newTask.due_time" />
 
       <label for="createDate">Start Date</label>
-      <input ref="createdDate" type="date" v-model="newTask.createDate" />
+      <input ref="createdDate" type="date" v-model="newTask.create_time" />
 
       <label for="notes">Notes</label>
       <textarea v-model="newTask.note" placeholder="Notes"></textarea>
 
-      <button class="btn-cornflower" @click="editTask()">Add Task</button>
+      <button class="btn-cornflower" @click="editTask()">Save Changes</button>
     </div>
   </div>
 </template>
@@ -42,11 +42,15 @@ export default {
       newTask: {
         title: this.task.title,
         description: this.task.description,
-        dueDate: this.task.dueDate,
-        createDate: this.task.createDate,
+        due_time: this.task.due_time.split(" ")[0],
+        create_time: this.task.create_time.split(" ")[0],
         note: this.task.note,
       },
     };
+  },
+
+  created() {
+    console.log(this.task);
   },
 
   methods: {
@@ -57,7 +61,7 @@ export default {
         this.newTask.title,
         this.newTask.description,
         this.task.completed,
-        this.newTask.dueDate,
+        this.newTask.due_time,
         this.newTask.note
       );
       this.$store.dispatch("updateTasks");

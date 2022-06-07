@@ -184,7 +184,7 @@ export default class EveryTask {
       });
   }
 
-  async switch_task_status_all (task_id, task_status) {
+  async switchTaskStatus (task_id, task_status) {
     await axios
       .post("http://localhost:8080/", {
         action: "switch_task_status",

@@ -55,7 +55,7 @@
 
         <button
           class="login-button font-bold transition duration-300 text-ghostwhite px-10 py-3 border-2 border-transparent rounded-full mx-auto block mt-8"
-          @click="login"
+          @click="register"
           :disabled="!username || !email || !password"
         >
           Register
@@ -68,6 +68,7 @@
 <script>
 import EveryTask from "../utils/EveryTask";
 import EveryTaskSymbol from "../components/icons/EveryTaskSymbol.vue";
+import router from "../router";
 
 export default {
   name: "RegisterView",
@@ -79,16 +80,28 @@ export default {
       password: "YOMAMA",
     };
   },
+
+  created() {
+    // log the user out if they are logged in
+    if (this.$store.state.everyTask.getToken()) {
+      this.$store.dispatch("logout");
+    }
+  },
+
   methods: {
-    async login() {
-      console.log("Logging in...");
-      console.log(this.email);
-      console.log(this.password);
+    async register() {
       this.$store.getters.everyTask.register(
         this.email,
         this.password,
         this.username
       );
+      await this.$store.getters.everyTask
+        .login(this.email, this.password)
+        .then(() => {
+          if (this.$store.getters.everyTask.getToken()) {
+            router.push("/tasks");
+          }
+        });
     },
   },
 };

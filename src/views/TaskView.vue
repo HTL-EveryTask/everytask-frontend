@@ -1,11 +1,8 @@
 <template>
-  <div class="bg-ghostwhite neomorph-lifted-sm flex w-1/2 mx-auto p-3 rounded-2xl">
-    <button
-      @click="addTask()"
-      class="bg-red-500 self-center font-bold p-2 px-5 rounded-xl"
-    >
-      ADD
-    </button>
+  <div
+    class="bg-ghostwhite neomorph-lifted-sm flex w-1/2 mx-auto p-3 rounded-2xl"
+  >
+    <button @click="addTask()" class="btn-cornflower">ADD</button>
   </div>
   <TaskCard
     class="m-4"
