@@ -52,6 +52,7 @@ export default {
     async addTask() {
       this.$emit("close", this.task);
       await this.$store.getters.everyTask.addTask(
+        1,
         this.task.title,
         this.task.description,
         false,
