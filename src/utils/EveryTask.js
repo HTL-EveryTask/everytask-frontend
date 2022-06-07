@@ -167,4 +167,36 @@ export default class EveryTask {
   getToken() {
     return this.token;
   }
+
+  async addGroup(group_name, group_icon, group_description) {
+    await axios
+      .post("http://localhost:8080/", {
+        action: "addGroup",
+        group_name: group_name,
+        group_icon: group_icon,
+        group_description: group_description,
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  async switch_task_status_all (task_id, task_status) {
+    await axios
+      .post("http://localhost:8080/", {
+        action: "switch_task_status",
+        task_id: task_id,
+        task_status: task_status,
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      }
+      );
+    }
 }
