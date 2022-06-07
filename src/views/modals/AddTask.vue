@@ -64,6 +64,7 @@ export default {
       this.$emit("close", this.task);
       //TODO PLZ FÜR SUBTASK
       await this.$store.getters.everyTask.addTask(
+        1,
         this.task.title,
         this.task.description,
         false,
