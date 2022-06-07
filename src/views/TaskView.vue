@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-ghostwhite neomorph-lifted flex w-1/2 mx-auto p-3 rounded-2xl">
+  <div class="bg-ghostwhite neomorph-lifted-sm flex w-1/2 mx-auto p-3 rounded-2xl">
     <button
       @click="addTask()"
       class="bg-red-500 self-center font-bold p-2 px-5 rounded-xl"
@@ -24,6 +24,7 @@
 import TaskCard from "../components/TaskCard.vue";
 import CustomModal from "../components/CustomModal.vue";
 import AddTask from "./modals/AddTask.vue";
+import router from "../router";
 
 export default {
   name: "TaskView",
@@ -43,6 +44,10 @@ export default {
   },
 
   async mounted() {
+    if (!this.$store.getters.everyTask.getToken()) {
+      await router.push("/");
+    }
+
     await this.$store.dispatch("updateTasks");
     this.loading = false;
   },

@@ -42,12 +42,11 @@
 <script>
 import CheckCircle from "./icons/CheckCircle.vue";
 import CustomModal from "./CustomModal.vue";
-import AddTask from "../views/modals/AddTask.vue";
 import EditTask from "../views/modals/EditTask.vue";
 
 export default {
   name: "TaskCard",
-  components: { EditTask, AddTask, CustomModal, CheckCircle },
+  components: { EditTask, CustomModal, CheckCircle },
   props: {
     task: {
       type: Object,
