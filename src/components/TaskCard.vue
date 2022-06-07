@@ -5,7 +5,7 @@
       @click="editModal = true"
     >
       <div class="flex justify-center items-center mr-6">
-        <check-circle/>
+        <check-circle />
       </div>
       <div>
         <h1 class="text-xl font-bold">{{ task.title }}</h1>
@@ -47,7 +47,7 @@ import EditTask from "../views/modals/EditTask.vue";
 
 export default {
   name: "TaskCard",
-  components: {EditTask, AddTask, CustomModal, CheckCircle },
+  components: { EditTask, AddTask, CustomModal, CheckCircle },
   props: {
     task: {
       type: Object,
@@ -89,5 +89,9 @@ export default {
 
 .light button {
   background-color: #a5cefc;
+}
+
+.flex:hover {
+  cursor: pointer;
 }
 </style>
