@@ -3,6 +3,10 @@ import axios from "axios";
 export default class EveryTask {
   token = "";
 
+  getToken() {
+    return this.token;
+  }
+
   async login(email, password) {
     await axios
       .post("http://localhost:8080", {
@@ -141,7 +145,7 @@ export default class EveryTask {
     });
   }
 
-  async editTask(
+  async editTaskById(
     task_id,
     title_new,
     description_new,
