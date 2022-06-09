@@ -3,64 +3,61 @@
     <div class="flex flex-col">
       <div class="input-field">
         <label for="title">Title</label>
-        <input type="text" v-model="task.title" placeholder="Task Title" />
+        <input type="text" v-model="task.title" placeholder="Task Title"/>
       </div>
 
       <div class="input-field">
         <label for="description">Description</label>
         <textarea
-          v-model="task.description"
-          placeholder="Task Description"
+            v-model="task.description"
+            placeholder="Task Description"
         ></textarea>
       </div>
 
       <div class="input-field">
         <label for="dueDate">Due Date</label>
-        <input ref="dueDate" type="date" v-model="task.dueDate" />
+        <input ref="dueDate" type="date" v-model="task.dueDate"/>
       </div>
 
       <div class="input-field">
         <label for="createDate">Start Date</label>
-        <input ref="createdDate" type="date" v-model="task.createDate" />
+        <input ref="createdDate" type="date" v-model="task.createDate"/>
       </div>
 
       <div class="input-field">
         <label for="notes">Notes</label>
         <textarea
-          v-model="task.note"
-          ref="notes"
-          placeholder="Notes"
+            v-model="task.note"
+            ref="notes"
+            placeholder="Notes"
         ></textarea>
       </div>
 
-      <div class="input-field">
+      <div class="input-field relative">
         <label for="school">Subject</label>
-        <button
-          class="btn-cornflower m-0"
-          @click="showDropdown = !showDropdown"
-        ></button>
         <SearchDropDown
-          v-if="showDropdown"
-          :entries="$store.getters.untis.subjects"
-          @select="showDropdown = false"
+            :entries="$store.getters.untis.subjects"
+            @select="task.subject = $event"
         />
       </div>
 
-      <label>Subtasks</label>
-      <sub-task
-        v-for="(s, index) in task.subTasks"
-        v-model="task.subTasks[index]['text']"
-        :key="s"
-        @delete="deleteSubTask(index)"
-        @done="(done) => setSubTaskDone(index, done)"
-      />
+      <div class="input-field">
+        <label>Subtasks</label>
+        <sub-task
+            v-for="(s, index) in task.subTasks"
+            v-model="task.subTasks[index]['text']"
+            :key="s"
+            @delete="deleteSubTask(index)"
+            @done="(done) => setSubTaskDone(index, done)"
+        />
 
-      <button
-        class="btn-cornflower w-1/2 mt-5 py-2 px-4 rounded"
-        @click="addSubTask"
-      >
-        Add Sub Task
-      </button>
+        <button
+            class="btn-cornflower w-1/2 mt-5 py-2 px-4 rounded"
+            @click="addSubTask"
+        >
+          Add Sub Task
+        </button>
+      </div>
 
       <button class="btn-cornflower" @click="addTask()">Add Task</button>
     </div>
@@ -73,7 +70,7 @@ import SearchDropDown from "../../components/SearchDropDown.vue";
 
 export default {
   name: "AddTask",
-  components: { SearchDropDown, SubTask },
+  components: {SearchDropDown, SubTask},
   emits: ["close"],
 
   data() {
@@ -87,7 +84,6 @@ export default {
         subTasks: [],
         subject: null,
       },
-      showDropdown: false,
     };
   },
 
@@ -102,18 +98,19 @@ export default {
       this.$emit("close", this.task);
       //TODO PLZ FÜR SUBTASK
       await this.$store.getters.everyTask.addTask(
-        1,
-        this.task.title,
-        this.task.description,
-        false,
-        this.task.dueDate,
-        this.task.note
+          1,
+          this.task.title,
+          this.task.description,
+          false,
+          this.task.dueDate,
+          this.task.note
       );
       this.$store.dispatch("updateTasks");
     },
 
     addSubTask() {
-      this.task.subTasks.push({ text: "", done: false, id: Math.random() });
+      this.task.subTasks.push({text: "", done: false, id: Math.random()});
+      console.log(this.task);
     },
 
     deleteSubTask(index) {
