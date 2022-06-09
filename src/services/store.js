@@ -1,9 +1,11 @@
 import Vuex from "vuex";
 import EveryTask from "../utils/EveryTask";
+import Untis from "../utils/Untis.js";
 
 export const store = new Vuex.Store({
   state: {
     everyTask: new EveryTask(),
+    untis: new Untis(),
     tasks: [],
   },
   getters: {
@@ -23,6 +25,10 @@ export const store = new Vuex.Store({
     },
     setTasks(state, tasks) {
       state.tasks = tasks;
+    },
+
+    addUntis(state, data){
+      state.untis.initialize(data.domain, data.school, data.username, data.password);
     },
   },
 

@@ -23,6 +23,10 @@
         <span class="material-icons">group</span>
         <span class="text">Tasks</span>
       </router-link>
+      <router-link to="/untis" class="button">
+        <span class="material-icons">date_range</span>
+        <span class="text">Untis</span>
+      </router-link>
       <router-link to="/" class="button">
         <span class="material-icons">email</span>
         <span class="text">Contact</span>
