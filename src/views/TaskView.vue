@@ -1,100 +1,57 @@
 <template>
-  <div class="bg-slate-800 flex w-1/2 mx-auto p-3 rounded-2xl">
-    <button
-      @click="addTask()"
-      class="bg-red-500 self-center font-bold p-2 px-5 rounded-xl"
-    >
-      ADD
-    </button>
+  <div
+    class="bg-ghostwhite neomorph-lifted-sm flex w-1/2 mx-auto p-3 rounded-2xl"
+  >
+    <button @click="addTask()" class="btn-cornflower">ADD</button>
   </div>
-  <TaskCard class="m-2" v-for="task in tasks" :key="task.id" :task="task" />
-  <Modal></Modal>
+  <TaskCard
+    class="m-4"
+    v-for="task in tasks"
+    :key="task"
+    :task="task"
+    v-if="!loading"
+  />
+
+  <CustomModal v-model="addModal" title="Add a Task">
+    <AddTask @close="addModal = false" />
+  </CustomModal>
 </template>
 
 <script>
 import TaskCard from "../components/TaskCard.vue";
-import Modal from "./modals/Modal.vue";
+import CustomModal from "../components/CustomModal.vue";
+import AddTask from "./modals/AddTask.vue";
+import router from "../router";
 
 export default {
   name: "TaskView",
-  components: { Modal, TaskCard },
+  components: { AddTask, CustomModal, TaskCard },
 
   data() {
     return {
-      // TODO plz delete beispieldaten
-      tasks: [
-        {
-          id: 1,
-          title: "Task 1",
-          description: "Description 1",
-          status: "todo",
-        },
-        {
-          id: 2,
-          title: "Task 2",
-          description: "Description 2",
-          status: "todo",
-        },
-        {
-          id: 3,
-          title: "Task 3",
-          description: "Description 3",
-          status: "todo",
-        },
-        {
-          id: 4,
-          title: "Task 4",
-          description: "Description 4",
-          status: "todo",
-        },
-        {
-          id: 5,
-          title: "Task 5",
-          description: "Description 5",
-          status: "todo",
-        },
-        {
-          id: 6,
-          title: "Task 6",
-          description: "Description 6",
-          status: "todo",
-        },
-        {
-          id: 7,
-          title: "Task 7",
-          description: "Description 7",
-          status: "todo",
-        },
-        {
-          id: 8,
-          title: "Task 8",
-          description: "Description 8",
-          status: "todo",
-        },
-        {
-          id: 9,
-          title: "Task 9",
-          description: "Description 9",
-          status: "todo",
-        },
-        {
-          id: 10,
-          title: "Task 10",
-          description: "Description 10",
-          status: "todo",
-        },
-      ],
+      addModal: false,
+      loading: true,
     };
   },
 
   methods: {
     addTask() {
-      this.$router.push("/tasks/addTask");
+      this.addModal = true;
     },
   },
 
-  mounted() {
-    // TODO plz get Tasks and save them to this.tasks
+  async mounted() {
+    if (!this.$store.getters.everyTask.getToken()) {
+      await router.push("/");
+    }
+
+    await this.$store.dispatch("updateTasks");
+    this.loading = false;
+  },
+  computed: {
+    tasks() {
+      return this.$store.getters.tasks;
+    },
   },
 };
 </script>

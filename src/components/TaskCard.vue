@@ -1,8 +1,11 @@
 <template>
   <div class="flex">
-    <div class="text-black bg-slate-100 w-1/2 mx-auto flex p-6 rounded-2xl">
+    <div
+      class="text-black bg-slate-100 w-1/2 mx-auto flex p-6 rounded-2xl neomorph-lifted-sm"
+      @click="editModal = true"
+    >
       <div class="flex justify-center items-center mr-6">
-        <check-circle />
+        <check-circle @click.stop @check="handleCheck()" :checked="!!isDone" />
       </div>
       <div>
         <h1 class="text-xl font-bold">{{ task.title }}</h1>
@@ -12,7 +15,7 @@
       <div class="ml-auto flex flex-nowrap">
         <button
           class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
-          @click="deleteTask"
+          @click.stop="deleteTask"
         >
           Delete
         </button>
@@ -20,7 +23,7 @@
         <button
           class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
           v-if="deleteConfirm"
-          @click="
+          @click.stop="
             () => {
               this.deleteConfirm = false;
             }
@@ -30,15 +33,20 @@
         </button>
       </div>
     </div>
+    <CustomModal v-model="editModal" title="Edit Task">
+      <EditTask @close="editModal = false" :task="task"></EditTask>
+    </CustomModal>
   </div>
 </template>
 
 <script>
 import CheckCircle from "./icons/CheckCircle.vue";
+import CustomModal from "./CustomModal.vue";
+import EditTask from "../views/modals/EditTask.vue";
 
 export default {
   name: "TaskCard",
-  components: { CheckCircle },
+  components: { EditTask, CustomModal, CheckCircle },
   props: {
     task: {
       type: Object,
@@ -52,11 +60,13 @@ export default {
   data() {
     return {
       deleteConfirm: false,
+      editModal: false,
+      isDone: this.task.done,
     };
   },
 
   methods: {
-    deleteTask() {
+    async deleteTask() {
       if (!this.deleteConfirm) {
         this.deleteConfirm = true;
         setTimeout(() => {
@@ -65,7 +75,14 @@ export default {
         return;
       }
 
-      //TODO plz delete thx
+      await this.$store.getters.everyTask.deleteTask(this.task["pk_task_id"]);
+      this.$store.dispatch("updateTasks");
+    },
+
+    async handleCheck() {
+      // this.$store.dispatch("toggleTask", this.task["pk_task_id"]);
+      this.isDone = !this.isDone;
+      console.log(this.isDone);
     },
   },
 };
@@ -78,5 +95,9 @@ export default {
 
 .light button {
   background-color: #a5cefc;
+}
+
+.flex:hover {
+  cursor: pointer;
 }
 </style>

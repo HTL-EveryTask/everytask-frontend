@@ -23,7 +23,7 @@
         <span class="material-icons">group</span>
         <span class="text">Tasks</span>
       </router-link>
-      <router-link to="/contact" class="button">
+      <router-link to="/" class="button">
         <span class="material-icons">email</span>
         <span class="text">Contact</span>
       </router-link>
@@ -32,7 +32,7 @@
     <div class="flex"></div>
 
     <div class="menu">
-      <router-link to="/settings" class="button">
+      <router-link to="/" class="button">
         <span class="material-icons">settings</span>
         <span class="text">Settings</span>
       </router-link>
@@ -55,157 +55,105 @@ const ToggleMenu = () => {
 
 <style lang="scss" scoped>
 aside {
-
-
-
-
-  display: flex;
-  flex-direction: column;
-
-  background-color: #1e2a39;
-
-  color: var(--light);
-
+  @apply flex flex-col bg-gray-900 overflow-hidden min-h-screen p-4 bg-ghostwhite;
   width: calc(2rem + 32px);
-  overflow: hidden;
-  min-height: 100vh;
-  padding: 1rem;
-
   transition: 0.2s ease-in-out;
+}
+aside .flex {
+  flex: 1 1 0%;
+}
+aside .logo {
+  @apply mb-4;
 
-  .flex {
-    flex: 1 1 0%;
-  }
-
-  .logo {
-    margin-bottom: 1rem;
-
-
-    img {
-      width: 3rem;
-    }
-  }
-
-  .menu-toggle-wrap {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 1rem;
-
-    position: relative;
-
-    transition: 0.2s ease-in-out;
-
-    .menu-toggle {
-      transition: 0.2s ease-in-out;
-      .material-icons {
-        font-size: 2rem;
-        color: var(--light);
-        transition: 0.2s ease-out;
-      }
-
-      &:hover {
-        .material-icons {
-          color: var(--primary);
-          transform: translateX(0.5rem);
-        }
-      }
-    }
-  }
-
-  h3, .button .text {
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-  }
-
-  h3 {
-    color: var(--grey);
-    font-size: 0.875rem;
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
-  }
-
-  .menu {
-    margin: 0 -1rem;
-
-    .button {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-
-      transition: 0.2s ease-in-out;
-      padding: 0.5rem 1rem;
-
-      .material-icons {
-        font-size: 2rem;
-        color: var(--light);
-        transition: 0.2s ease-in-out;
-      }
-
-      .material-icons:hover {
-        font-size: 2.5rem;
-      }
-
-      .text {
-        color: var(--light);
-        transition: 0.2s ease-in-out;
-      }
-
-      &:hover {
-        background-color: #42769f;
-
-        .material-icons, .text {
-          color: var(--primary);
-        }
-      }
-
-      &.router-link-exact-active {
-        background-color: rgba(116, 66, 148, 0.73);
-        border-right: 5px solid var(--primary);
-
-        .material-icons, .text {
-          color: var(--primary);
-        }
-      }
-    }
-  }
-
-  .footer {
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-
-    p {
-      font-size: 0.875rem;
-      color: var(--grey);
-    }
-  }
-
-  &.is-expanded {
-    width: var(--sidebar-width);
-
-    .menu-toggle-wrap {
-      top: -3.5rem;
-
-      .menu-toggle {
-        transform: rotate(-180deg);
-      }
-    }
-
-    h3, .button .text {
-      opacity: 1;
-    }
-
-    .button {
-      .material-icons {
-        margin-right: 2rem;
-      }
-    }
-
-    .footer {
-      opacity: 0;
-    }
-  }
-
-  @media (max-width: 1024px) {
+}
+aside .logo img {
+  @apply w-12;
+}
+aside .menu-toggle-wrap {
+  @apply flex justify-end mb-4 relative;
+  transition: 0.2s ease-in-out;
+}
+aside .menu-toggle-wrap .menu-toggle {
+  transition: 0.2s ease-in-out;
+}
+aside .menu-toggle-wrap .menu-toggle .material-icons {
+  @apply text-3xl;
+  color: var(--light);
+  transition: 0.2s ease-out;
+}
+aside .menu-toggle-wrap .menu-toggle:hover .material-icons {
+  color: var(--primary);
+  transform: translateX(0.5rem);
+}
+aside h3, aside .button .text {
+  @apply opacity-0;
+  transition: opacity 0.3s ease-in-out;
+}
+aside h3 {
+ @apply text-sm mb-2 uppercase;
+  color: var(--grey);
+}
+aside .menu {
+  margin: 0 -1rem;
+}
+aside .menu .button {
+  @apply flex items-center no-underline;
+  transition: 0.2s ease-in-out;
+  padding: 0.5rem 1rem;
+}
+aside .menu .button .material-icons {
+  @apply text-3xl;
+  color: var(--light);
+  transition: 0.2s ease-in-out;
+}
+aside .menu .button .material-icons:hover {
+  font-size: 2.5rem;
+}
+aside .menu .button .text {
+  color: var(--light);
+  transition: 0.2s ease-in-out;
+}
+aside .menu .button:hover {
+  @apply bg-blue-700;
+}
+aside .menu .button:hover .material-icons, aside .menu .button:hover .text {
+  color: var(--primary);
+}
+aside .menu .button.router-link-exact-active {
+  background-color: rgba(116, 66, 148, 0.73);
+  border-right: 5px solid var(--primary);
+}
+aside .menu .button.router-link-exact-active .material-icons, aside .menu .button.router-link-exact-active .text {
+  color: var(--primary);
+}
+aside .footer {
+  @apply opacity-0;
+  transition: opacity 0.3s ease-in-out;
+}
+aside .footer p {
+  @apply text-sm;
+  color: var(--grey);
+}
+aside.is-expanded {
+  width: var(--sidebar-width);
+}
+aside.is-expanded .menu-toggle-wrap {
+  top: -3.5rem;
+}
+aside.is-expanded .menu-toggle-wrap .menu-toggle {
+  transform: rotate(-180deg);
+}
+aside.is-expanded h3, aside.is-expanded .button .text {
+  @apply opacity-100;
+}
+aside.is-expanded .button .material-icons {
+  @apply mr-8;
+}
+aside.is-expanded .footer {
+  @apply opacity-0;
+}
+@media (max-width: 1024px) {
+  aside {
     position: absolute;
     z-index: 99;
   }

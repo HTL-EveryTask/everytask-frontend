@@ -1,10 +1,5 @@
 <template>
-  <router-link to="/tasks" class="btn btn-primary">
-    <i class="fas fa-arrow-left"></i>
-    Back
-  </router-link>
-  <div class="container bg-slate-600">
-    <h1>Adding a Task</h1>
+  <div class="container">
     <div class="flex flex-col">
       <label for="title">Title</label>
       <input type="text" v-model="task.title" placeholder="Task Title" />
@@ -22,27 +17,40 @@
       <input ref="createdDate" type="date" v-model="task.createDate" />
 
       <label for="notes">Notes</label>
-      <textarea v-model="task.notes" placeholder="Notes"></textarea>
+      <textarea v-model="task.note" ref="notes" placeholder="Notes"></textarea>
 
-      <button class="bg-cornflower p-4 mx-auto" @click="addTask">Add Task</button>
+      <label>Subtasks</label>
+      <sub-task v-for="(s,index) in task.subTasks" v-model="task.subTasks[index]['text']" :key="s" @delete="deleteSubTask(index)" @done="(done) => setSubTaskDone(index,done)"/>
+
+      <button
+        class="btn-cornflower w-1/2 mt-5 py-2 px-4 rounded"
+        @click="addSubTask">
+        Add Sub Task
+      </button>
+
+      <button class="btn-cornflower" @click="addTask()">
+        Add Task
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import EveryTask from '../../utils/EveryTask';
-
+import SubTask from "../../components/subTask.vue";
 export default {
   name: "AddTask",
+  components: {SubTask},
+  emits: ["close"],
 
   data() {
     return {
       task: {
-        title: "",
-        description: "",
-        dueDate: "",
+        title: "AAA",
+        description: "AAAAAAAA",
+        dueDate: "2022-07-22",
         createDate: "",
-        note: "",
+        note: "AAAAAAAAA",
+        subTasks: [],
       },
     };
   },
@@ -50,13 +58,35 @@ export default {
   mounted() {
     this.$refs.createdDate.valueAsDate = new Date();
     this.$refs.dueDate.valueAsDate = new Date();
+    //TODO delete dummy data and reset on mounted
   },
 
   methods: {
-    addTask() {
-      var task = new EveryTask;
-      task.addTask();
+    async addTask() {
+      this.$emit("close", this.task);
+      //TODO PLZ FÜR SUBTASK
+      await this.$store.getters.everyTask.addTask(
+        1,
+        this.task.title,
+        this.task.description,
+        false,
+        this.task.dueDate,
+        this.task.note
+      );
+      this.$store.dispatch("updateTasks");
     },
+
+    addSubTask() {
+      this.task.subTasks.push({text:'',done:false, id:Math.random()});
+    },
+
+    deleteSubTask(index){
+      this.task.subTasks.splice(index,1);
+    },
+
+    setSubTaskDone(index, done){
+      this.task.subTasks[index]['done'] = done;
+    }
   },
 };
 </script>
@@ -64,8 +94,5 @@ export default {
 <style scoped>
 .container {
   color: black;
-  background-color: white;
-  padding: 20px;
-  margin: 10px;
 }
 </style>

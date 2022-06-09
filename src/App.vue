@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <NavBar class="navbar" />
+    <NavBar class="navbar" v-if="$store.getters.everyTask.getToken()" />
     <div class="content">
       <RouterView />
     </div>
