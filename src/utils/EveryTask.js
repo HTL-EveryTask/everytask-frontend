@@ -5,7 +5,7 @@ export default class EveryTask {
 
   async login(email, password) {
     await axios
-      .post("http://localhost:8080", {
+      .post("http://localhost:8080/", {
         action: "login",
         email: email,
         password: password,
@@ -184,12 +184,11 @@ export default class EveryTask {
       });
   }
 
-  async switchTaskStatus (task_id, task_status) {
+  async switchTaskStatus (task_id) {
     await axios
       .post("http://localhost:8080/", {
         action: "switch_task_status",
         task_id: task_id,
-        task_status: task_status,
       })
       .then((response) => {
         console.log(response.data);

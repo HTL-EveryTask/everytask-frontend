@@ -81,6 +81,9 @@ export default {
 
     async handleCheck() {
       // this.$store.dispatch("toggleTask", this.task["pk_task_id"]);
+      await this.$store.getters.everyTask.switchTaskStatus(
+        this.task["pk_task_id"]
+      );
       this.isDone = !this.isDone;
       console.log(this.isDone);
     },
