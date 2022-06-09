@@ -20,7 +20,7 @@
       <textarea v-model="task.note" ref="notes" placeholder="Notes"></textarea>
 
       <label>Subtasks</label>
-      <sub-task v-for="(s,index) in task.subTasks" v-model="task.subTasks[index]['text']" :key="s" @delete="deleteSubTask(index)" @done="(done) => setDone(index,done)"/>
+      <sub-task v-for="(s,index) in task.subTasks" v-model="task.subTasks[index]['text']" :key="s" @delete="deleteSubTask(index)" @done="(done) => setSubTaskDone(index,done)"/>
 
       <button
         class="btn-cornflower w-1/2 mt-5 py-2 px-4 rounded"
@@ -50,7 +50,7 @@ export default {
         dueDate: "2022-07-22",
         createDate: "",
         note: "AAAAAAAAA",
-        subTasks: []
+        subTasks: [],
       },
     };
   },
@@ -58,6 +58,7 @@ export default {
   mounted() {
     this.$refs.createdDate.valueAsDate = new Date();
     this.$refs.dueDate.valueAsDate = new Date();
+    //TODO delete dummy data and reset on mounted
   },
 
   methods: {
@@ -77,14 +78,13 @@ export default {
 
     addSubTask() {
       this.task.subTasks.push({text:'',done:false, id:Math.random()});
-      console.log(this.task.subTasks);
     },
 
     deleteSubTask(index){
       this.task.subTasks.splice(index,1);
     },
 
-    setDone(index, done){
+    setSubTaskDone(index, done){
       this.task.subTasks[index]['done'] = done;
     }
   },
