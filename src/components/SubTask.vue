@@ -1,9 +1,9 @@
 <template>
-  <div class="flex flex-nowrap">
+  <div class="flex flex-nowrap items-center mb-1">
 
     <CheckCircle :checked="done" @check="setDone"></CheckCircle>
 
-    <input :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" class="mx-2 mb-1"/>
+    <input :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" class="mx-2"/>
 
     <button @click="deleteSubTask">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">

@@ -22,15 +22,31 @@ import TaskCard from "../components/TaskCard.vue";
 import CustomModal from "../components/CustomModal.vue";
 import AddTask from "./modals/AddTask.vue";
 import router from "../router";
+import SearchDropDown from "../components/SearchDropDown.vue";
 
 export default {
   name: "TaskView",
-  components: { AddTask, CustomModal, TaskCard },
+  components: { SearchDropDown, AddTask, CustomModal, TaskCard },
 
   data() {
     return {
       addModal: false,
       loading: true,
+
+      dummy: [
+        {
+          name: "Test",
+          description: "Test",
+        },
+        {
+          name: "Test2",
+          description: "Test2",
+        },
+        {
+          name: "Test3",
+          description: "Test3",
+        },
+      ],
     };
   },
 

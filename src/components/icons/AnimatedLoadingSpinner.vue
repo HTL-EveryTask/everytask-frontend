@@ -50,6 +50,15 @@
 <script>
 export default {
   name: "AnimatedLoadingSpinner",
+
+  data() {
+    return {
+      circleDashoffset: "360",
+      circleTransition: "all 0.6s ease-in-out",
+      checkDashoffset: "0",
+      checkTransition: "all 0.6s ease-in-out",
+    };
+  },
 };
 </script>
 

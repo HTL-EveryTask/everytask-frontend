@@ -26,9 +26,6 @@
         <div class="input-field">
           <label for="password">Password</label>
           <input id="password" type="password" v-model="password" placeholder="Password" />
-          <div class="subtext-right">
-            <a href="#">Forgot password?</a>
-          </div>
         </div>
 
         <button
@@ -55,8 +52,8 @@ export default {
   data() {
     return {
       school: "htl3r",
-      username: "8082",
-      password: "na sicher nicht",
+      username: "8085",
+      password: "testpasswort123",
       domain: "urania.webuntis.com",
       showLogin: true,
     };
@@ -64,7 +61,7 @@ export default {
 
   methods: {
     login() {
-      this.showLogin = false;
+      // this.showLogin = false;
       //make new untis object using the data from the form and push it to the store
       this.$store.commit("addUntis", {
         school: this.school,

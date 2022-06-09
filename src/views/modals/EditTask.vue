@@ -35,7 +35,7 @@
 
 <script>
 
-import SubTask from "../../components/subTask.vue";
+import SubTask from "../../components/SubTask.vue";
 
 export default {
   name: "EditTask",

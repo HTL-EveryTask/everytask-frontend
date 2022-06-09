@@ -11,6 +11,7 @@ export const store = new Vuex.Store({
   getters: {
     everyTask: (state) => state.everyTask,
     tasks: (state) => state.tasks,
+    untis: (state) => state.untis,
   },
 
   mutations: {
