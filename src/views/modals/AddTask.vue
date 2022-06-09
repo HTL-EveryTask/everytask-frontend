@@ -17,12 +17,13 @@
       <input ref="createdDate" type="date" v-model="task.createDate" />
 
       <label for="notes">Notes</label>
-      <textarea v-model="task.note" placeholder="Notes"></textarea>
+      <textarea v-model="task.note" ref="notes" placeholder="Notes"></textarea>
 
-      <sub-task v-for="(s,index) in task.subTasks" v-model="task.subTasks[index]" @delete="deleteSubTask(index)"/>
+      <label>Subtasks</label>
+      <sub-task v-for="(s,index) in task.subTasks" v-model="task.subTasks[index]['text']" :key="s" @delete="deleteSubTask(index)" @done="(done) => setSubTaskDone(index,done)"/>
 
       <button
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        class="btn-cornflower w-1/2 mt-5 py-2 px-4 rounded"
         @click="addSubTask">
         Add Sub Task
       </button>
@@ -57,6 +58,7 @@ export default {
   mounted() {
     this.$refs.createdDate.valueAsDate = new Date();
     this.$refs.dueDate.valueAsDate = new Date();
+    //TODO delete dummy data and reset on mounted
   },
 
   methods: {
@@ -75,12 +77,15 @@ export default {
     },
 
     addSubTask() {
-      this.task.subTasks.push("");
-      console.log(this.task.subTasks);
+      this.task.subTasks.push({text:'',done:false, id:Math.random()});
     },
 
     deleteSubTask(index){
       this.task.subTasks.splice(index,1);
+    },
+
+    setSubTaskDone(index, done){
+      this.task.subTasks[index]['done'] = done;
     }
   },
 };

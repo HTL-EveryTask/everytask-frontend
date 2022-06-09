@@ -19,17 +19,28 @@
       <label for="notes">Notes</label>
       <textarea v-model="newTask.note" placeholder="Notes"></textarea>
 
+      <label>Subtasks</label>
+      <sub-task v-for="(s,index) in task.subTasks" v-model="task.subTasks[index]['text']" :key="s" @delete="deleteSubTask(index)" @done="(done) => setSubTaskDone(index,done)"/>
+
+      <button
+          class="btn-cornflower w-1/2 mt-5 py-2 px-4 rounded"
+          @click="addSubTask">
+        Add Sub Task
+      </button>
+
       <button class="btn-cornflower" @click="editTask()">Save Changes</button>
     </div>
   </div>
 </template>
 
 <script>
-// TODO: no mutating props
+
+import SubTask from "../../components/subTask.vue";
 
 export default {
   name: "EditTask",
   emits: ["close"],
+  components: {SubTask},
   props: {
     task: {
       type: Object,
@@ -45,6 +56,7 @@ export default {
         due_time: this.task.due_time.split(" ")[0],
         create_time: this.task.create_time.split(" ")[0],
         note: this.task.note,
+        subTasks: this.task.subTasks,
       },
     };
   },
@@ -54,6 +66,7 @@ export default {
   },
 
   methods: {
+    // TODO PLZ SUBTASKS AGAIN
     async editTask() {
       this.$emit("close", this.newTask);
       await this.$store.getters.everyTask.editTaskbyId(
@@ -66,6 +79,21 @@ export default {
       );
       this.$store.dispatch("updateTasks");
     },
+
+    addSubTask() {
+      if (!this.task.subTasks) {
+        this.task.subTasks = [];
+      }
+      this.task.subTasks.push({text:'',done:false, id:Math.random()});
+    },
+
+    deleteSubTask(index){
+      this.task.subTasks.splice(index,1);
+    },
+
+    setSubTaskDone(index, done){
+      this.task.subTasks[index]['done'] = done;
+    }
   },
 };
 </script>
