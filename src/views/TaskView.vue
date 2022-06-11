@@ -1,16 +1,13 @@
 <template>
-  <div class="bg-ghostwhite neomorph-lifted-sm flex w-1/2 mx-auto p-3 rounded-2xl">
-    <button
-      @click="addTask()"
-      class="bg-red-500 self-center font-bold p-2 px-5 rounded-xl"
-    >
-      ADD
-    </button>
+  <div
+    class="bg-ghostwhite neomorph-lifted-sm flex w-1/2 mx-auto p-3 rounded-2xl"
+  >
+    <button @click="addTask()" class="btn-cornflower">ADD</button>
   </div>
   <TaskCard
     class="m-4"
     v-for="task in tasks"
-    :key="task.id"
+    :key="task"
     :task="task"
     v-if="!loading"
   />
@@ -25,15 +22,31 @@ import TaskCard from "../components/TaskCard.vue";
 import CustomModal from "../components/CustomModal.vue";
 import AddTask from "./modals/AddTask.vue";
 import router from "../router";
+import SearchDropDown from "../components/SearchDropDown.vue";
 
 export default {
   name: "TaskView",
-  components: { AddTask, CustomModal, TaskCard },
+  components: { SearchDropDown, AddTask, CustomModal, TaskCard },
 
   data() {
     return {
       addModal: false,
       loading: true,
+
+      dummy: [
+        {
+          name: "Test",
+          description: "Test",
+        },
+        {
+          name: "Test2",
+          description: "Test2",
+        },
+        {
+          name: "Test3",
+          description: "Test3",
+        },
+      ],
     };
   },
 

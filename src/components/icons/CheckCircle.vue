@@ -64,11 +64,13 @@ function styleChecked() {
 
 export default {
   name: "CheckCircle",
-  data() {
-    return {
-      isChecked: false,
-    };
+  props: {
+    checked: {
+      type: Boolean,
+      default: false,
+    },
   },
+
   mounted() {
     const checkCircle = this.$refs.checkCircle;
     checkCircle.style.transform = "scale(0.8)";
@@ -81,16 +83,18 @@ export default {
     this.$refs.check.style.stroke = "#85849a";
   },
   methods: {
-    check() {
+    handleClick() {
       this.$emit("check");
     },
-    handleClick() {
-      if (this.isChecked) {
-        styleUnchecked.call(this);
-      } else {
+  },
+
+  watch: {
+    checked(newValue) {
+      if (newValue) {
         styleChecked.call(this);
+      } else {
+        styleUnchecked.call(this);
       }
-      this.isChecked = !this.isChecked;
     },
   },
 };

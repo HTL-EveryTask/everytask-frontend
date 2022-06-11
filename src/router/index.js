@@ -3,6 +3,7 @@ import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
 import TaskView from "../views/TaskView.vue";
 import AddTask from "../views/modals/AddTask.vue";
+import UntisView from "../views/UntisView.vue";
 import LandingView from "../views/LandingView.vue";
 
 const router = createRouter({
@@ -35,6 +36,11 @@ const router = createRouter({
       path: "/tasks/addTask",
       name: "addTask",
       component: AddTask,
+    },
+    {
+      path: "/untis",
+      name: "untis",
+      component: UntisView,
     },
   ],
 });
