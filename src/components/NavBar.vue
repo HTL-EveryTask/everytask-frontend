@@ -1,7 +1,7 @@
 <template>
   <aside :class="`${is_expanded ? 'is-expanded' : ''}`">
     <div class="logo">
-      <img src="../assets/symbol_copy.png" alt="Vue" />
+      <img src="../assets/symbol_copy.png" alt="Vue"/>
     </div>
 
     <div class="menu-toggle-wrap">
@@ -36,18 +36,21 @@
     <div class="flex"></div>
 
     <div class="menu">
-      <router-link to="/" class="button">
-        <span class="material-icons">settings</span>
-        <span class="text">Settings</span>
-      </router-link>
+      <div v-if="$store.getters.untis.login === true" class="item">
+        <span class="material-icons">check</span>
+        <span class="text">{{ $store.getters.untis.username }}</span>
+      </div>
+      <div v-else class="item">
+        <span class="material-icons">close</span>
+        <span class="text">Untis Login</span>
+      </div>
     </div>
 
   </aside>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
+import {ref} from 'vue'
 
 const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
 
@@ -63,99 +66,126 @@ aside {
   width: calc(2rem + 32px);
   transition: 0.2s ease-in-out;
 }
+
 aside .flex {
   flex: 1 1 0%;
 }
+
 aside .logo {
   @apply mb-4;
 
 }
+
 aside .logo img {
   @apply w-12;
 }
+
 aside .menu-toggle-wrap {
   @apply flex justify-end mb-4 relative;
   transition: 0.2s ease-in-out;
 }
+
 aside .menu-toggle-wrap .menu-toggle {
   transition: 0.2s ease-in-out;
 }
+
 aside .menu-toggle-wrap .menu-toggle .material-icons {
   @apply text-3xl;
   color: var(--light);
   transition: 0.2s ease-out;
 }
+
 aside .menu-toggle-wrap .menu-toggle:hover .material-icons {
   color: var(--primary);
   transform: translateX(0.5rem);
 }
-aside h3, aside .button .text {
+
+aside h3, aside .button .text, aside .item .text {
   @apply opacity-0;
   transition: opacity 0.3s ease-in-out;
 }
+
 aside h3 {
- @apply text-sm mb-2 uppercase;
+  @apply text-sm mb-2 uppercase;
   color: var(--grey);
 }
+
 aside .menu {
   margin: 0 -1rem;
 }
-aside .menu .button {
+
+aside .menu .button, aside .menu .item {
   @apply flex items-center no-underline;
   transition: 0.2s ease-in-out;
   padding: 0.5rem 1rem;
 }
-aside .menu .button .material-icons {
+
+aside .menu .button .material-icons, aside .menu .item .material-icons {
   @apply text-3xl;
   color: var(--light);
   transition: 0.2s ease-in-out;
 }
+
 aside .menu .button .material-icons:hover {
   font-size: 2.5rem;
 }
-aside .menu .button .text {
+
+aside .menu .button .text, aside .menu .item .text {
   color: var(--light);
   transition: 0.2s ease-in-out;
 }
+
 aside .menu .button:hover {
   @apply bg-blue-700;
 }
+
 aside .menu .button:hover .material-icons, aside .menu .button:hover .text {
   color: var(--primary);
 }
+
 aside .menu .button.router-link-exact-active {
   background-color: rgba(116, 66, 148, 0.73);
   border-right: 5px solid var(--primary);
 }
+
 aside .menu .button.router-link-exact-active .material-icons, aside .menu .button.router-link-exact-active .text {
   color: var(--primary);
 }
+
 aside .footer {
   @apply opacity-0;
   transition: opacity 0.3s ease-in-out;
 }
+
 aside .footer p {
   @apply text-sm;
   color: var(--grey);
 }
+
 aside.is-expanded {
   width: var(--sidebar-width);
 }
+
 aside.is-expanded .menu-toggle-wrap {
   top: -3.5rem;
 }
+
 aside.is-expanded .menu-toggle-wrap .menu-toggle {
   transform: rotate(-180deg);
 }
-aside.is-expanded h3, aside.is-expanded .button .text {
+
+aside.is-expanded h3, aside.is-expanded .button .text, aside.is-expanded .item .text {
   @apply opacity-100;
 }
-aside.is-expanded .button .material-icons {
+
+aside.is-expanded .button .material-icons, aside.is-expanded .item .material-icons {
   @apply mr-8;
 }
+
 aside.is-expanded .footer {
   @apply opacity-0;
 }
+
 @media (max-width: 1024px) {
   aside {
     position: absolute;

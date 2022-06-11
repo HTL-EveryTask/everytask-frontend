@@ -19,14 +19,31 @@
       <label for="notes">Notes</label>
       <textarea v-model="newTask.note" placeholder="Notes"></textarea>
 
-      <label>Subtasks</label>
-      <sub-task v-for="(s,index) in task.subTasks" v-model="task.subTasks[index]['text']" :key="s" @delete="deleteSubTask(index)" @done="(done) => setSubTaskDone(index,done)"/>
+      <div class="relative">
+        <label for="school">Subject</label>
+        <SearchDropDown
+            :entries="$store.getters.untis.subjects"
+            @select="task.subject = $event"
+        />
+      </div>
 
-      <button
-          class="btn-cornflower w-1/2 mt-5 py-2 px-4 rounded"
-          @click="addSubTask">
-        Add Sub Task
-      </button>
+      <div>
+        <label>Subtasks</label>
+        <sub-task
+            v-for="(s, index) in task.subTasks"
+            v-model="task.subTasks[index]['text']"
+            :key="s"
+            @delete="deleteSubTask(index)"
+            @done="(done) => setSubTaskDone(index, done)"
+        />
+
+        <button
+            class="btn-cornflower w-1/2 mt-5 py-2 px-4 rounded"
+            @click="addSubTask"
+        >
+          Add Sub Task
+        </button>
+      </div>
 
       <button class="btn-cornflower" @click="editTask()">Save Changes</button>
     </div>
@@ -36,11 +53,12 @@
 <script>
 
 import SubTask from "../../components/SubTask.vue";
+import SearchDropDown from "../../components/SearchDropDown.vue";
 
 export default {
   name: "EditTask",
   emits: ["close"],
-  components: {SubTask},
+  components: {SubTask, SearchDropDown},
   props: {
     task: {
       type: Object,
@@ -57,6 +75,7 @@ export default {
         create_time: this.task.create_time.split(" ")[0],
         note: this.task.note,
         subTasks: this.task.subTasks,
+        subject: this.task.subject,
       },
     };
   },
@@ -66,7 +85,7 @@ export default {
   },
 
   methods: {
-    // TODO PLZ SUBTASKS AGAIN
+    // TODO PLZ SUBTASKS AND SUBJECT AGAIN
     async editTask() {
       this.$emit("close", this.newTask);
       await this.$store.getters.everyTask.editTaskbyId(

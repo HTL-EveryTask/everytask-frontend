@@ -2,7 +2,7 @@
   <div
     class="h-full min-h-screen bg-ghostwhite flex justify-center content-center flex-col"
   >
-    <div v-if="showLogin" class="login-card neomorph-lifted">
+    <div class="login-card neomorph-lifted">
       <div class="logo-box block mx-auto">
         <WebUntisSymbol class="logo"></WebUntisSymbol>
       </div>
@@ -37,14 +37,12 @@
         </button>
       </div>
     </div>
-    <div v-if="!showLogin">
-
-    </div>
   </div>
 </template>
 
 <script>
 import WebUntisSymbol from "../components/icons/UntisSymbol.vue";
+import router from "../router";
 
 export default {
   name: "UntisView",
@@ -55,7 +53,6 @@ export default {
       username: "8085",
       password: "testpasswort123",
       domain: "urania.webuntis.com",
-      showLogin: true,
     };
   },
 
@@ -70,7 +67,30 @@ export default {
         domain: this.domain,
       });
     },
-  }
+  },
+
+  computed: {
+    loggedIn () {
+      return this.$store.getters.untis.login
+    }
+  },
+
+  // make watcher on store untis login status
+  // if login is successful, push to /tasks
+  watch: {
+    loggedIn: function(newVal, oldVal) {
+      if (newVal) {
+        console.log(newVal);
+        this.$router.push("/tasks");
+      }
+    }
+  },
+
+  async mounted() {
+    if (!this.$store.getters.everyTask.getToken()) {
+      await router.push("/");
+    }
+  },
 };
 </script>
 

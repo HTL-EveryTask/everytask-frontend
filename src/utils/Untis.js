@@ -7,6 +7,7 @@ export default class Untis {
   username = "";
   password = "";
   untis = null;
+  login = false;
 
   subjects = [];
 
@@ -42,6 +43,7 @@ export default class Untis {
         },
       });
       console.log(typeof response.data.result === "number");
+     this.login = typeof response.data.result === "number";
       return typeof response.data.result === "number";
     };
 

@@ -96,7 +96,7 @@ export default {
   methods: {
     async addTask() {
       this.$emit("close", this.task);
-      //TODO PLZ FÜR SUBTASK
+      //TODO PLZ FÜR SUBTASK AND SUBJECT
       await this.$store.getters.everyTask.addTask(
           1,
           this.task.title,
