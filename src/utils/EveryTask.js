@@ -13,6 +13,7 @@ export default class EveryTask {
       .then((response) => {
         console.log(response.data);
         this.token = response.data.token;
+        localStorage.setItem("token", this.token);
       })
       .catch((error) => {
         console.log(error);
@@ -87,19 +88,19 @@ export default class EveryTask {
     } else {
       var month = now.getMonth() + 1;
     }
-      return (
-        now.getFullYear() +
-        "-" +
-        month +
-        "-" +
-        now.getDate() +
-        " " +
-        now.getHours() +
-        ":" +
-        now.getMinutes() +
-        ":" +
-        now.getSeconds()
-      );
+    return (
+      now.getFullYear() +
+      "-" +
+      month +
+      "-" +
+      now.getDate() +
+      " " +
+      now.getHours() +
+      ":" +
+      now.getMinutes() +
+      ":" +
+      now.getSeconds()
+    );
   }
 
   timeFormat(date) {
@@ -168,6 +169,10 @@ export default class EveryTask {
     return this.token;
   }
 
+  setToken(token) {
+    this.token = token;
+  }
+
   async addGroup(group_name, group_icon, group_description) {
     await axios
       .post("http://localhost:8080/", {
@@ -184,7 +189,7 @@ export default class EveryTask {
       });
   }
 
-  async switchTaskStatus (task_id) {
+  async switchTaskStatus(task_id) {
     await axios
       .post("http://localhost:8080/", {
         action: "switch_task_status",
@@ -195,7 +200,6 @@ export default class EveryTask {
       })
       .catch((error) => {
         console.log(error);
-      }
-      );
-    }
+      });
+  }
 }

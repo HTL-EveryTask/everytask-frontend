@@ -50,6 +50,8 @@ function styleUnchecked() {
   this.$refs.circle.style.stroke = "#85849a";
   this.$refs.check.style.strokeWidth = "8";
   this.$refs.check.style.stroke = "#85849a";
+
+  this.$refs.circle.style.fill = null;
 }
 
 function styleChecked() {
@@ -59,6 +61,10 @@ function styleChecked() {
   this.$refs.circle.style.stroke = null;
   this.$refs.check.style.strokeWidth = null;
   this.$refs.check.style.stroke = null;
+  this.$refs.check.style.stroke = "#fdfeff";
+  this.$refs.circle.style.fill = "#5D86FF";
+  this.$refs.circle.style.stroke = "#5073d3";
+
   this.$refs.circleAnimation.beginElement();
 }
 
@@ -81,6 +87,12 @@ export default {
     this.$refs.circle.style.stroke = "#85849a";
     this.$refs.check.style.strokeWidth = "8";
     this.$refs.check.style.stroke = "#85849a";
+
+    if (this.checked) {
+      styleChecked.call(this);
+    } else {
+      styleUnchecked.call(this);
+    }
   },
   methods: {
     handleClick() {
