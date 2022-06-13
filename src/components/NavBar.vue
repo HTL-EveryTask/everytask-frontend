@@ -40,10 +40,18 @@
         <span class="material-icons">check</span>
         <span class="text">{{ $store.getters.untis.username }}</span>
       </div>
-      <div v-else class="item">
+      <router-link v-else to="/untis" class="button">
         <span class="material-icons">close</span>
         <span class="text">Untis Login</span>
+      </router-link>
+      <div v-if="$store.getters.everyTask.token !== ''" class="item">
+        <span class="material-icons">check</span>
+        <span class="text">{{ $store.getters.everyTask.username }}</span>
       </div>
+      <router-link v-else to="/login" class="button">
+        <span class="material-icons">close</span>
+        <span class="text">User Login</span>
+      </router-link>
     </div>
 
   </aside>

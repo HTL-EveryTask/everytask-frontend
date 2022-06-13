@@ -2,6 +2,7 @@ import axios from "axios";
 
 export default class EveryTask {
   token = "";
+  username = "";
 
   async login(email, password) {
     await axios
@@ -13,6 +14,7 @@ export default class EveryTask {
       .then((response) => {
         console.log(response.data);
         this.token = response.data.token;
+        this.username = response.data.username;
       })
       .catch((error) => {
         console.log(error);

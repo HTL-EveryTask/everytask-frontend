@@ -3,7 +3,7 @@
 
     <CheckCircle :checked="done" @check="setDone"></CheckCircle>
 
-    <input :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" class="mx-2"/>
+    <input :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" class="mx-2" :maxlength="255"/>
 
     <button @click="deleteSubTask">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
