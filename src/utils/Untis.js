@@ -12,15 +12,11 @@ export default class Untis {
   subjects = [];
 
   initialize(domain, school, username, password) {
-    this.domain = domain;
-    this.school = school;
-    this.username = username;
-    this.password = password;
     this.untis = new WebUntis(
-      this.school,
-      this.username,
-      this.password,
-      this.domain
+      school,
+      username,
+      password,
+      domain
     );
     //login to untis
     console.log(this.untis);
@@ -97,6 +93,10 @@ export default class Untis {
       .then((subjects) => {
         console.log(subjects);
         this.subjects = subjects;
+        this.domain = domain;
+        this.school = school;
+        this.username = username;
+        this.password = password;
       })
       .catch((err) => {
         console.log("Couldn't log in!");

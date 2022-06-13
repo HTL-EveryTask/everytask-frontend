@@ -12,27 +12,12 @@
         <p class="text-sm break-all">{{ task.description }}</p>
       </div>
 
-      <div class="ml-auto flex flex-nowrap">
-        <button
-          class="bg-red-500 hover:bg-red-700 text-white font-bold h-12 py-2 px-4 rounded-full"
-          @click.stop="deleteTask"
-        >
-          Delete
-        </button>
-
-        <button
-          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
-          v-if="deleteConfirm"
-          @click.stop="
-            () => {
-              this.deleteConfirm = false;
-            }
-          "
-        >
-          Abbrechen
-        </button>
+      <div class="ml-auto flex flex-nowrap menu-toggle-wrap">
+        <TaskMenu @click.stop @clickOption="clickMenu"></TaskMenu>
       </div>
+
     </div>
+
     <CustomModal :lock-scroll="false" v-model="editModal" title="Edit Task">
       <EditTask @close="editModal = false" :task="task"></EditTask>
     </CustomModal>
@@ -43,10 +28,11 @@
 import CheckCircle from "./icons/CheckCircle.vue";
 import CustomModal from "./CustomModal.vue";
 import EditTask from "../views/modals/EditTask.vue";
+import TaskMenu from "./TaskMenu.vue";
 
 export default {
   name: "TaskCard",
-  components: { EditTask, CustomModal, CheckCircle },
+  components: {TaskMenu, EditTask, CustomModal, CheckCircle},
   props: {
     task: {
       type: Object,
@@ -59,7 +45,6 @@ export default {
 
   data() {
     return {
-      deleteConfirm: false,
       editModal: false,
       isDone: this.task.done,
     };
@@ -67,14 +52,6 @@ export default {
 
   methods: {
     async deleteTask() {
-      if (!this.deleteConfirm) {
-        this.deleteConfirm = true;
-        setTimeout(() => {
-          this.deleteConfirm = false;
-        }, 4000);
-        return;
-      }
-
       await this.$store.getters.everyTask.deleteTask(this.task["pk_task_id"]);
       this.$store.dispatch("updateTasks");
     },
@@ -86,6 +63,14 @@ export default {
       );
       this.isDone = !this.isDone;
       console.log(this.isDone);
+    },
+
+    clickMenu(option) {
+      if (option === "Edit") {
+        this.editModal = true;
+      } else if (option === "Delete") {
+        this.deleteTask();
+      }
     },
   },
 };
