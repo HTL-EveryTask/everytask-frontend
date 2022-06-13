@@ -33,7 +33,7 @@
         </button>
       </div>
     </div>
-    <CustomModal v-model="editModal" title="Edit Task">
+    <CustomModal :lock-scroll="false" v-model="editModal" title="Edit Task">
       <EditTask @close="editModal = false" :task="task"></EditTask>
     </CustomModal>
   </div>

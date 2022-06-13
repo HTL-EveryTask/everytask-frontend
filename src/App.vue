@@ -28,6 +28,7 @@ export default {
     if (localStorage.getItem("token")) {
       let everyTask = new EveryTask();
       everyTask.setToken(localStorage.getItem("token"));
+      everyTask.setUsername(localStorage.getItem("username"));
       this.$store.state.everyTask = everyTask;
     } else {
       this.$router.push("/");
