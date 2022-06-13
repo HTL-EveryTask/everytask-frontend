@@ -62,7 +62,7 @@ const ToggleMenu = () => {
 
 <style lang="scss" scoped>
 aside {
-  @apply flex flex-col bg-gray-900 overflow-hidden min-h-screen p-4 bg-ghostwhite;
+  @apply flex flex-col overflow-hidden min-h-screen p-4 bg-ghostwhite text-raisin shadow-lg;
   width: calc(2rem + 32px);
   transition: 0.2s ease-in-out;
 }
@@ -136,7 +136,7 @@ aside .menu .button .text, aside .menu .item .text {
 }
 
 aside .menu .button:hover {
-  @apply bg-blue-700;
+  @apply bg-steelpink-200;
 }
 
 aside .menu .button:hover .material-icons, aside .menu .button:hover .text {
@@ -144,7 +144,7 @@ aside .menu .button:hover .material-icons, aside .menu .button:hover .text {
 }
 
 aside .menu .button.router-link-exact-active {
-  background-color: rgba(116, 66, 148, 0.73);
+  @apply bg-cornflower-300;
   border-right: 5px solid var(--primary);
 }
 
