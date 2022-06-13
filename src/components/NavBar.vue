@@ -20,16 +20,12 @@
         <span class="text">Register</span>
       </router-link>
       <router-link to="/tasks" class="button">
-        <span class="material-icons">group</span>
+        <span class="material-icons">view_list</span>
         <span class="text">Tasks</span>
       </router-link>
       <router-link to="/untis" class="button">
         <span class="material-icons">date_range</span>
         <span class="text">Untis</span>
-      </router-link>
-      <router-link to="/" class="button">
-        <span class="material-icons">email</span>
-        <span class="text">Contact</span>
       </router-link>
     </div>
 
@@ -40,12 +36,12 @@
         <span class="material-icons">check</span>
         <span class="text">{{ $store.getters.untis.username }}</span>
       </div>
-      <router-link v-else to="/untis" class="button">
+      <router-link v-else to="/untis" class="button untis">
         <span class="material-icons">close</span>
         <span class="text">Untis Login</span>
       </router-link>
       <div v-if="$store.getters.everyTask.token !== ''" class="item">
-        <span class="material-icons">check</span>
+        <span class="material-icons">account_circle</span>
         <span class="text">{{ $store.getters.everyTask.getUsername() }}</span>
       </div>
       <router-link v-else to="/" class="button">
@@ -163,7 +159,7 @@ aside .menu .button:hover .material-icons, aside .menu .button:hover .text {
   color: var(--primary);
 }
 
-aside .menu .button.router-link-exact-active {
+aside .menu .button.router-link-exact-active:not(.untis){
   background-color: rgba(116, 66, 148, 0.73);
   border-right: 5px solid var(--primary);
 }
