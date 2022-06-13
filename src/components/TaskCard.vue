@@ -1,7 +1,7 @@
 <template>
   <div class="flex">
     <div
-      class="text-black bg-slate-100 w-1/2 mx-auto flex p-6 rounded-2xl neomorph-lifted-sm"
+      class="text-raisin-500 bg-ghostwhite w-1/2 mx-auto flex p-6 rounded-2xl neomorph-lifted-sm"
       @click="editModal = true"
     >
       <div class="flex justify-center items-center mr-6">
@@ -9,12 +9,12 @@
       </div>
       <div>
         <h1 class="text-xl font-bold">{{ task.title }}</h1>
-        <p class="text-sm">{{ task.description }}</p>
+        <p class="text-sm break-all">{{ task.description }}</p>
       </div>
 
       <div class="ml-auto flex flex-nowrap">
         <button
-          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
+          class="bg-red-500 hover:bg-red-700 text-white font-bold h-12 py-2 px-4 rounded-full"
           @click.stop="deleteTask"
         >
           Delete

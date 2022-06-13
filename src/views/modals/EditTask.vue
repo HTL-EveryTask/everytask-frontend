@@ -89,11 +89,12 @@ export default {
     async editTask() {
       this.$emit("close", this.newTask);
       await this.$store.getters.everyTask.editTaskbyId(
-        this.task.id,
+        this.task.pk_task_id,
         this.newTask.title,
         this.newTask.description,
-        this.task.completed,
+        this.task.done,
         this.newTask.due_time,
+        this.newTask.create_time,
         this.newTask.note
       );
       this.$store.dispatch("updateTasks");
