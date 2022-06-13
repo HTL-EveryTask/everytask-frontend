@@ -13,7 +13,7 @@
       <button class="btn-cornflower" @click="showCcModal = true">
         Create a Class
       </button>
-      <button class="btn-cornflower" @click="showJcModal">Join a Class</button>
+      <button class="btn-cornflower" @click="showJcModal = true">Join a Class</button>
     </div>
   </div>
 
@@ -35,7 +35,7 @@ import JoinClass from "./modals/JoinClass.vue";
 
 export default {
   name: "LandingView",
-  components: {JoinClass, CustomModal, CreateClass, EveryTaskSymbol },
+  components: { JoinClass, CustomModal, CreateClass, EveryTaskSymbol },
   data() {
     return {
       showCcModal: false,

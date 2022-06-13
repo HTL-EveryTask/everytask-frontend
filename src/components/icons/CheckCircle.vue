@@ -122,7 +122,7 @@ svg {
   transform-origin: center;
 }
 
-svg:hover #checkcircle * {
+svg:hover #checkcircle circle {
   filter: brightness(0.8);
 }
 </style>
