@@ -78,6 +78,7 @@ export default class EveryTask {
     async getTasks() {
         let response = await axios.post("http://localhost:8080/", {
             action: "getTasks",
+            token: this.token,
         });
 
         console.log(response.data);
