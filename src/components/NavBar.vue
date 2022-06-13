@@ -46,12 +46,16 @@
       </router-link>
       <div v-if="$store.getters.everyTask.token !== ''" class="item">
         <span class="material-icons">check</span>
-        <span class="text">{{ $store.getters.everyTask.username }}</span>
+        <span class="text">{{ $store.getters.everyTask.getUsername() }}</span>
       </div>
-      <router-link v-else to="/login" class="button">
+      <router-link v-else to="/" class="button">
         <span class="material-icons">close</span>
         <span class="text">User Login</span>
       </router-link>
+      <div @click="logout($store,$router)" class="button">
+        <span class="material-icons logout">exit_to_app</span>
+        <span class="text">Logout</span>
+      </div>
     </div>
 
   </aside>
@@ -59,6 +63,11 @@
 
 <script setup>
 import {ref} from 'vue'
+
+const logout = (store,router) => {
+    store.dispatch('logout')
+    router.push("/");
+}
 
 const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
 
@@ -81,7 +90,10 @@ aside .flex {
 
 aside .logo {
   @apply mb-4;
+}
 
+.logout {
+  color: red !important;
 }
 
 aside .logo img {
